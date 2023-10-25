@@ -1,0 +1,41 @@
+[
+    {
+        "question": "How many employees does your company or organization have?",
+        "option": [
+            "1-5",
+            "6-25",
+            "26-100",
+            "100-500",
+            "500-1000",
+            "More than 1000"
+        ],
+        "tagname": ""
+    },
+    {
+        "question": "Is your employer primarily a tech company/organization?",
+        "option": [
+            "Yes",
+            "No"
+        ],
+        "tagname": ""
+    },
+    {
+        "question": "Does your employer provide mental health benefits as part of healthcare coverage?",
+        "option": [
+            "Not eligible for coverage / N/A",
+            "No",
+            "Yes",
+            "I don't know "
+        ],
+        "tagname": ""
+    },
+    {
+        "question": "Do you know the options for mental health care available under your employer-provided coverage?",
+        "option": [
+            "No",
+            "Yes",
+            "I am not sure"
+        ],
+        "tagname": ""
+    }
+]
