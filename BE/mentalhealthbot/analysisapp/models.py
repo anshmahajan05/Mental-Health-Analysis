@@ -10,9 +10,7 @@ class Mst_UsrTbl(AbstractUser):
     address = models.TextField(null=True)
     type = models.CharField(null=True, max_length=50, default="Customer")
     IsSubscribed = models.BooleanField(default=False)
-    # Specify custom related_name values
-    groups = models.ManyToManyField(Group, related_name='custom_user_groups')
-    user_permissions = models.ManyToManyField(Permission, related_name='custom_user_permissions')
+    # Specify custom related_name value
 
 class SubscriptionTable(models.Model):
     UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, null=True)
