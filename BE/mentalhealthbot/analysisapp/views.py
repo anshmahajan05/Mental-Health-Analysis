@@ -64,11 +64,6 @@ class logout(APIView):
                 {"message": "Logout Successful!"}, status=status.HTTP_200_OK
             )
         except Exception:
-<<<<<<< Updated upstream
-            return Response(
-                {"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST
-            )
-=======
             return Response({"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
 @method_decorator(csrf_exempt, name='dispatch')
 class signup(APIView):
@@ -87,4 +82,3 @@ class signup(APIView):
 
         user = Mst_UsrTbl.objects.create_user(username=username, password=password, name=name, ContactNo=contactno, email=email,  type=type,address=address)
         return Response({"message": "New User Created"},status=status.HTTP_200_OK)
->>>>>>> Stashed changes
