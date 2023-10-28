@@ -50,15 +50,20 @@ class login(APIView):
             data = {
                 "message": "invalid credentials",
             }
-        return Response(data)
+        return Response(data, status=status.HTTP_200_OK)
 
-@method_decorator(csrf_exempt, name='dispatch')
+
+@method_decorator(csrf_exempt, name="dispatch")
 class logout(APIView):
     def post(self, request):
         try:
-            refresh_token = request.data.get('refresh_token')
+            refresh_token = request.data.get("refresh_token")
             token = RefreshToken(refresh_token)
             token.blacklist()
-            return Response({"message": "Logout Successful!"}, status=status.HTTP_200_OK)
+            return Response(
+                {"message": "Logout Successful!"}, status=status.HTTP_200_OK
+            )
         except Exception:
-            return Response({"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(
+                {"message": "Invalid token."}, status=status.HTTP_400_BAD_REQUEST
+            )
