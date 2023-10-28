@@ -1,5 +1,4 @@
-[
-    {
+[{
         "question": "How many employees does your company or organization have?",
         "option": [
             "1-5",
@@ -9,7 +8,17 @@
             "500-1000",
             "More than 1000"
         ],
-        "tagname": ""
+        "variable": {
+            "name": "num_employees",
+            "options": {
+                "1-5": 1,
+                "6-25": 6,
+                "26-100": 26,
+                "100-500": 101,
+                "500-1000": 501,
+                "More than 1000": 1001
+            }
+        }
     },
     {
         "question": "Is your employer primarily a tech company/organization?",
@@ -17,7 +26,27 @@
             "Yes",
             "No"
         ],
-        "tagname": ""
+        "variable": {
+            "name": "",
+            "options": {
+                "Yes": 1,
+                "No": 0
+            }
+        }
+    },
+    {
+        "question": "Is your primary role within your company related to tech/IT?",
+        "option": [
+            "Yes",
+            "No"
+        ],
+        "variable": {
+            "name": "",
+            "options": {
+                "Yes": 1,
+                "No": 0
+            }
+        }
     },
     {
         "question": "Does your employer provide mental health benefits as part of healthcare coverage?",
@@ -27,7 +56,10 @@
             "Yes",
             "I don't know "
         ],
-        "tagname": ""
+        "variable": {
+            "name": "",
+            "options": {}
+        }
     },
     {
         "question": "Do you know the options for mental health care available under your employer-provided coverage?",
@@ -36,6 +68,155 @@
             "Yes",
             "I am not sure"
         ],
-        "tagname": ""
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Has your employer ever formally discussed mental health (for example, as part of a wellness campaign or other official communication)?",
+        "option": [
+            "No",
+            "Yes",
+            "I don't know"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Does your employer offer resources to learn more about mental health concerns and options for seeking help?",
+        "option": [
+            "No",
+            "Yes",
+            "I don't know"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Is your anonymity protected if you choose to take advantage of mental health or substance abuse treatment resources provided by your employer?",
+        "option": [
+            "No",
+            "Yes",
+            "I don't know"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "If a mental health issue prompted you to request a medical leave from work, asking for that leave would be:",
+        "option": [
+            "Very easy",
+            "Somewhat easy",
+            "Neither easy nor difficult",
+            "Very difficult",
+            "Somewhat difficult",
+            "I don't know"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you think that discussing a mental health disorder with your employer would have negative consequences?",
+        "option": [
+            "No",
+            "Maybe",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you think that discussing a mental health disorder with your employer would have negative consequences?",
+        "option": [
+            "No",
+            "Maybe",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you feel comfortable discussing a mental health disorder with your coworkers?",
+        "option": [
+            "No",
+            "Maybe",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you feel comfortable discussing a mental health disorder with your direct supervisor(s)?",
+        "option": [
+            "No",
+            "Maybe",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you feel that your employer takes mental health as seriously as physical health?",
+        "option": [
+            "No",
+            "I don't know",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have you heard of or observed negative consequences for co-workers who have been open about mental health issues in your workplace?",
+        "option": [
+            "No",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you have previous employers?",
+        "option": [
+            "No",
+            "Yes"
+        ],
+        "variable": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have your previous employers provided mental health benefits?",
+        "option": [
+            "No, none did",
+            "Yes, they all did",
+            "I don't know",
+            "Some did"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
     }
 ]
