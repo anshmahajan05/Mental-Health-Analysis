@@ -7,6 +7,7 @@ class Mst_UsrTbl(AbstractUser):
     name = models.CharField(max_length=255, null=True)
     email = models.EmailField(null=True)
     ContactNo = models.BigIntegerField(null=True, default="9999999999")
+    address = models.TextField(null=True)
     type = models.CharField(null=True, max_length=50, default="Customer")
     IsSubscribed = models.BooleanField(default=False)
     # Specify custom related_name values
@@ -19,3 +20,8 @@ class SubscriptionTable(models.Model):
     SubscriptionType = models.CharField(max_length=255, null=True)
     StartDate = models.DateField(null=True)
     EndDate = models.DateField(null=True)
+
+class BookingTbl(models.Model):
+    BookingId = models.AutoField(primary_key=True)
+    UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_user')
+    ThreapistId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_therapist')
