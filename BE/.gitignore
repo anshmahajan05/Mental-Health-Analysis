@@ -1,3 +1,4 @@
-/env/
-/migrations/
-/__pycache__/
+/mentalhealthbot/env/
+/mentalhealthbot/analysisapp/migrations/
+/mentalhealthbot/analysisapp/__pycache__/
+/mentalhealthbot/mentalhealthbot/__pycache__/
