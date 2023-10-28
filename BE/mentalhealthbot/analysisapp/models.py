@@ -23,3 +23,4 @@ class BookingTbl(models.Model):
     BookingId = models.AutoField(primary_key=True)
     UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_user')
     ThreapistId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_therapist')
+    BookingDate = models.DateField(null=True)
