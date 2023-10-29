@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+import pandas as pd
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
@@ -190,3 +192,40 @@ class Booking(APIView):
         else:
             context["Error"] = "User type doesnot exist"
         return JsonResponse(context, status=status.HTTP_200_OK)
+    
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class subscriptiontable(APIView):
+    def post(self,request):
+        UserId=request.user.id
+        SubscriptionType=request.data.get("SubscriptionType")
+        StartDate= datetime.now().date()
+        EndDate = StartDate + timedelta(days=30)
+        user_instance = Mst_UsrTbl.objects.get(id=UserId)
+        subscription = SubscriptionTable.objects.create(
+            UserId=user_instance,
+
+            )
+        subscription.StartDate=StartDate
+        subscription.EndDate=EndDate
+        subscription.SubscriptionType=SubscriptionType
+        subscription.save()
+        
+
+        return Response({"message" : "Subscription Added"},status=status.HTTP_200_OK)
+    
+    def get(self,request):
+        context={}
+        UserId=request.user.id
+        User_obj = pd.DataFrame(
+            SubscriptionTable.objects.filter(UserId=UserId).values(
+                "SubscriptionId","SubscriptionType","StartDate","EndDate"
+            )
+        )
+        context["Subscription"] = User_obj.to_dict(orient="records")
+        return JsonResponse(context,status=status.HTTP_200_OK)
+    
+    
+        
+
+
