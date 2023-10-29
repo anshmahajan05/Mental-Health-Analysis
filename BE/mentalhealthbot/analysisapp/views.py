@@ -131,7 +131,7 @@ class Booking(APIView):
             # )
             # threapist = booking_obj["ThreapistId"].to_list()
             threapist_obj = pd.DataFrame(
-                Mst_UsrTbl.objects.filter(type="Threapist").values(
+                Mst_UsrTbl.objects.filter(type="Therapist").values(
                     "id", "name", "email", "ContactNo", "address"
                 )
             )
@@ -143,7 +143,7 @@ class Booking(APIView):
             #     how="inner",
             # )
             context["Customer"] = threapist_obj.to_dict(orient="records")
-        elif request.user.type == "Threapist":
+        elif request.user.type == "Therapist":
             booking_obj = pd.DataFrame(
                 BookingTbl.objects.filter(
                     ThreapistId=request.user.id, approved_by_Threapist=False
@@ -165,7 +165,7 @@ class Booking(APIView):
             merged_df = pd.merge(
                 booking_obj, User_obj, left_on="UserId", right_on="id", how="inner"
             )
-            context["Threapist"] = merged_df.to_dict(orient="records")
+            context["Therapist"] = merged_df.to_dict(orient="records")
         else:
             context["Error"] = "User type doesnot exist"
         return JsonResponse(context, status=status.HTTP_200_OK)
@@ -191,7 +191,7 @@ class Booking(APIView):
 
             context["message"] = "Booking created pending confirmation from Threapist"
 
-        elif request.user.type == "Threapist":
+        elif request.user.type == "Therapist":
             BookingId = data.get("BookingId")
             approve = data.get("approve")
 
@@ -270,7 +270,7 @@ class ConfirmBooking(APIView):
                 how="inner",
             )
             context["Customer"] = merged_df.to_dict(orient="records")
-        elif request.user.type == "Threapist":
+        elif request.user.type == "Therapist":
             booking_obj = pd.DataFrame(
                 BookingTbl.objects.filter(
                     ThreapistId=request.user.id, approved_by_Threapist=True
@@ -292,7 +292,7 @@ class ConfirmBooking(APIView):
             merged_df = pd.merge(
                 booking_obj, User_obj, left_on="UserId", right_on="id", how="inner"
             )
-            context["Threapist"] = merged_df.to_dict(orient="records")
+            context["Therapist"] = merged_df.to_dict(orient="records")
         else:
             context["Error"] = "User type doesnot exist"
         return JsonResponse(context, status=status.HTTP_200_OK)
