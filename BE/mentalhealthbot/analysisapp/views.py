@@ -24,6 +24,7 @@ from django.utils.decorators import method_decorator
 from datetime import date
 from django.db.models import Sum
 from rest_framework_simplejwt.authentication import JWTAuthentication
+import pandas as pd
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -98,3 +99,94 @@ class signup(APIView):
             address=address,
         )
         return Response({"message": "New User Created"}, status=status.HTTP_200_OK)
+
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class Booking(APIView):
+    def get(self, request):
+        context = {}
+        if request.user.type == "Customer":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(UserId=request.user.id).values(
+                    "BookingId",
+                    "ThreapistId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            threapist = booking_obj["ThreapistId"].to_list()
+            threapist_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=threapist).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            merged_df = pd.merge(
+                booking_obj,
+                threapist_obj,
+                left_on="ThreapistId",
+                right_on="id",
+                how="inner",
+            )
+            context["Customer"] = merged_df.to_dict(orient="records")
+        elif request.user.type == "Threapist":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(
+                    ThreapistId=request.user.id, approved_by_Threapist=False
+                ).values(
+                    "BookingId",
+                    "UserId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            User = booking_obj["UserId"].to_list()
+            User_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=User).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            print("booking>>>>>>>>>>>>>>>>>>>>>>>\n", User_obj)
+            merged_df = pd.merge(
+                booking_obj, User_obj, left_on="UserId", right_on="id", how="inner"
+            )
+            context["Threapist"] = merged_df.to_dict(orient="records")
+        else:
+            context["Error"] = "User type doesnot exist"
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        data = request.data
+        context = {}
+        if request.user.type == "Customer":
+            ThreapistId = data.get("Threapistid")
+            BookingDate = data.get("BookingDate")
+            BookingTime = data.get("BookingTime")
+            UserId = request.user.id
+            user_instance = Mst_UsrTbl.objects.get(id=UserId)
+            therapist_instance = Mst_UsrTbl.objects.get(id=ThreapistId)
+
+            Booking_created = BookingTbl.objects.create(
+                ThreapistId=therapist_instance, UserId=user_instance
+            )
+            Booking_created.BookingTime = BookingTime
+            Booking_created.BookingDate = BookingDate
+
+            Booking_created.save()
+
+            context["message"] = "Booking created pending confirmation from Threapist"
+
+        elif request.user.type == "Threapist":
+            BookingId = data.get("BookingId")
+            approve = data.get("approve")
+
+            Booking_created = BookingTbl.objects.get(BookingId=BookingId)
+            Booking_created.approved_by_Threapist = approve
+            Booking_created.save()
+
+            context["message"] = "Status changed"
+        else:
+            context["Error"] = "User type doesnot exist"
+        return JsonResponse(context)
