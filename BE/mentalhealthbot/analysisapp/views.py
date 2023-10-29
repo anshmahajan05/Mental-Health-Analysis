@@ -1,3 +1,5 @@
+from datetime import datetime, timedelta
+import pandas as pd
 from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.permissions import IsAdminUser
@@ -98,3 +100,125 @@ class signup(APIView):
             address=address,
         )
         return Response({"message": "New User Created"}, status=status.HTTP_200_OK)
+
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class Booking(APIView):
+    def get(self, request):
+        context = {}
+        if request.user.type == "Customer":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(UserId=request.user.id).values(
+                    "BookingId",
+                    "ThreapistId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            threapist = booking_obj["ThreapistId"].to_list()
+            threapist_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=threapist).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            merged_df = pd.merge(
+                booking_obj,
+                threapist_obj,
+                left_on="ThreapistId",
+                right_on="id",
+                how="inner",
+            )
+            context["Customer"] = merged_df.to_dict(orient="records")
+        elif request.user.type == "Threapist":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(
+                    ThreapistId=request.user.id, approved_by_Threapist=False
+                ).values(
+                    "BookingId",
+                    "UserId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            User = booking_obj["UserId"].to_list()
+            User_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=User).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            print("booking>>>>>>>>>>>>>>>>>>>>>>>\n", User_obj)
+            merged_df = pd.merge(
+                booking_obj, User_obj, left_on="UserId", right_on="id", how="inner"
+            )
+            context["Threapist"] = merged_df.to_dict(orient="records")
+        else:
+            context["Error"] = "User type doesnot exist"
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+    def post(self, request):
+        data = request.data
+        context = {}
+        if request.user.type == "Customer":
+            ThreapistId = data.get("Threapistid")
+            BookingDate = data.get("BookingDate")
+            BookingTime = data.get("BookingTime")
+            UserId = request.user.id
+            user_instance = Mst_UsrTbl.objects.get(id=UserId)
+            therapist_instance = Mst_UsrTbl.objects.get(id=ThreapistId)
+
+            Booking_created = BookingTbl.objects.create(
+                ThreapistId=therapist_instance, UserId=user_instance
+            )
+            Booking_created.BookingTime = BookingTime
+            Booking_created.BookingDate = BookingDate
+
+            Booking_created.save()
+
+            context["message"] = "Booking created pending confirmation from Threapist"
+
+        elif request.user.type == "Threapist":
+            BookingId = data.get("BookingId")
+            approve = data.get("approve")
+
+            Booking_created = BookingTbl.objects.get(BookingId=BookingId)
+            Booking_created.approved_by_Threapist = approve
+            Booking_created.save()
+
+            context["message"] = "Status changed"
+        else:
+            context["Error"] = "User type doesnot exist"
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class subscriptiontable(APIView):
+    def post(self, request):
+        UserId = request.user.id
+        SubscriptionType = request.data.get("SubscriptionType")
+        StartDate = datetime.now().date()
+        EndDate = StartDate + timedelta(days=30)
+        user_instance = Mst_UsrTbl.objects.get(id=UserId)
+        subscription = SubscriptionTable.objects.create(
+            UserId=user_instance,
+        )
+        subscription.StartDate = StartDate
+        subscription.EndDate = EndDate
+        subscription.SubscriptionType = SubscriptionType
+        subscription.save()
+
+        return Response({"message": "Subscription Added"}, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        context = {}
+        UserId = request.user.id
+        User_obj = pd.DataFrame(
+            SubscriptionTable.objects.filter(UserId=UserId).values(
+                "SubscriptionId", "SubscriptionType", "StartDate", "EndDate"
+            )
+        )
+        context["Subscription"] = User_obj.to_dict(orient="records")
+        return JsonResponse(context, status=status.HTTP_200_OK)

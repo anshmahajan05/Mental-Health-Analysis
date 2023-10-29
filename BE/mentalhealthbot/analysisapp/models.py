@@ -24,3 +24,5 @@ class BookingTbl(models.Model):
     UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_user')
     ThreapistId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_therapist')
     BookingDate = models.DateField(null=True)
+    BookingTime = models.TimeField(null=True)
+    approved_by_Threapist = models.BooleanField(default=False)
