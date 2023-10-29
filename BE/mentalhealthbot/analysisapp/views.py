@@ -189,4 +189,4 @@ class Booking(APIView):
             context["message"] = "Status changed"
         else:
             context["Error"] = "User type doesnot exist"
-        return JsonResponse(context)
+        return JsonResponse(context, status=status.HTTP_200_OK)
