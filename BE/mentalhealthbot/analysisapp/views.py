@@ -120,29 +120,29 @@ class Booking(APIView):
     def get(self, request):
         context = {}
         if request.user.type == "Customer":
-            booking_obj = pd.DataFrame(
-                BookingTbl.objects.filter(UserId=request.user.id).values(
-                    "BookingId",
-                    "ThreapistId",
-                    "BookingDate",
-                    "BookingTime",
-                    "approved_by_Threapist",
-                )
-            )
-            threapist = booking_obj["ThreapistId"].to_list()
+            # booking_obj = pd.DataFrame(
+            #     BookingTbl.objects.filter(UserId=request.user.id).values(
+            #         "BookingId",
+            #         "ThreapistId",
+            #         "BookingDate",
+            #         "BookingTime",
+            #         "approved_by_Threapist",
+            #     )
+            # )
+            # threapist = booking_obj["ThreapistId"].to_list()
             threapist_obj = pd.DataFrame(
-                Mst_UsrTbl.objects.filter(id__in=threapist).values(
+                Mst_UsrTbl.objects.filter(type="Threapist").values(
                     "id", "name", "email", "ContactNo", "address"
                 )
             )
-            merged_df = pd.merge(
-                booking_obj,
-                threapist_obj,
-                left_on="ThreapistId",
-                right_on="id",
-                how="inner",
-            )
-            context["Customer"] = merged_df.to_dict(orient="records")
+            # merged_df = pd.merge(
+            #     booking_obj,
+            #     threapist_obj,
+            #     left_on="ThreapistId",
+            #     right_on="id",
+            #     how="inner",
+            # )
+            context["Customer"] = threapist_obj.to_dict(orient="records")
         elif request.user.type == "Threapist":
             booking_obj = pd.DataFrame(
                 BookingTbl.objects.filter(
@@ -239,3 +239,60 @@ class subscriptiontable(APIView):
 def mail_send(subject, message, from_email, to_email):
     print(to_email)
     send_mail(subject, message, from_email, to_email)
+
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class ConfirmBooking(APIView):
+    def get(self, request):
+        context = {}
+        if request.user.type == "Customer":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(UserId=request.user.id).values(
+                    "BookingId",
+                    "ThreapistId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            threapist = booking_obj["ThreapistId"].to_list()
+            threapist_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=threapist).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            merged_df = pd.merge(
+                booking_obj,
+                threapist_obj,
+                left_on="ThreapistId",
+                right_on="id",
+                how="inner",
+            )
+            context["Customer"] = merged_df.to_dict(orient="records")
+        elif request.user.type == "Threapist":
+            booking_obj = pd.DataFrame(
+                BookingTbl.objects.filter(
+                    ThreapistId=request.user.id, approved_by_Threapist=True
+                ).values(
+                    "BookingId",
+                    "UserId",
+                    "BookingDate",
+                    "BookingTime",
+                    "approved_by_Threapist",
+                )
+            )
+            User = booking_obj["UserId"].to_list()
+            User_obj = pd.DataFrame(
+                Mst_UsrTbl.objects.filter(id__in=User).values(
+                    "id", "name", "email", "ContactNo", "address"
+                )
+            )
+            print("booking>>>>>>>>>>>>>>>>>>>>>>>\n", User_obj)
+            merged_df = pd.merge(
+                booking_obj, User_obj, left_on="UserId", right_on="id", how="inner"
+            )
+            context["Threapist"] = merged_df.to_dict(orient="records")
+        else:
+            context["Error"] = "User type doesnot exist"
+        return JsonResponse(context, status=status.HTTP_200_OK)

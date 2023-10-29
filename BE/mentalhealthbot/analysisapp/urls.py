@@ -8,4 +8,5 @@ urlpatterns = [
     path("signup/", signup.as_view(), name="signup"),
     path("Booking/", Booking.as_view(), name="Booking"),
     path("subscriptiontable/", subscriptiontable.as_view(), name="subscriptiontable"),
+    path("ConfirmBooking/", ConfirmBooking.as_view(), name="ConfirmBooking"),
 ]
