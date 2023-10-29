@@ -27,6 +27,7 @@ from datetime import date
 from django.db.models import Sum
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.core.mail import send_mail
+from django.conf import settings
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -49,6 +50,11 @@ class login(APIView):
                 "id": user.id,
                 "refresh": str(refresh),
             }
+            subject = "Login Notification"
+            message = f"Hello {user.username}, You have been signed in successfully."
+            from_email = settings.EMAIL_HOST_USER
+            to_email = [user.email]
+            mail_send(subject, message, from_email, to_email)
         else:
             data = {
                 "message": "invalid credentials",
