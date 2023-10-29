@@ -51,7 +51,7 @@ class login(APIView):
                 "refresh": str(refresh),
             }
             subject = "Login Notification"
-            message = f"Hello {user.username}, You have been signed in successfully."
+            message = f"Hello {user.name}, You have been signed in successfully."
             from_email = settings.EMAIL_HOST_USER
             to_email = [user.email]
             mail_send(subject, message, from_email, to_email)
