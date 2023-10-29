@@ -55,7 +55,7 @@ class login(APIView):
             }
         return Response(data, status=status.HTTP_200_OK)
 
- 
+
 @method_decorator(csrf_exempt, name="dispatch")
 class logout(APIView):
     def post(self, request):
@@ -224,6 +224,7 @@ class subscriptiontable(APIView):
         context["Subscription"] = User_obj.to_dict(orient="records")
         return JsonResponse(context, status=status.HTTP_200_OK)
 
+
 def mail_send(subject, message, from_email, to_email):
     print(to_email)
-    send_mail(subject, message, from_email, [to_email])
+    send_mail(subject, message, from_email, to_email)
