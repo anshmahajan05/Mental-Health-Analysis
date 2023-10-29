@@ -106,6 +106,11 @@ class signup(APIView):
             type=type,
             address=address,
         )
+        subject = "Sign Up Notification"
+        message = f"Hello {user.name}, You have been signed up successfully."
+        from_email = settings.EMAIL_HOST_USER
+        to_email = [user.email]
+        mail_send(subject, message, from_email, to_email)
         return Response({"message": "New User Created"}, status=status.HTTP_200_OK)
 
 
