@@ -24,9 +24,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure--mjb%@r!%+m1(ctzrq704n1wm)=3$-w4kzs1_5yp*@#q5z&)#e"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
 ]
 
 ROOT_URLCONF = "mentalhealthbot.urls"
@@ -167,4 +168,8 @@ DEFAULT_FROM_EMAIL = "anshmahajan051002@gmail.com"
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "http://localhost:5174",
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+ROOT_URLCONF = "mentalhealthbot.urls"
