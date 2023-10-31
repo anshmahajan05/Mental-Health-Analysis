@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import "./LoginForm.css"; // Import your CSS file for styling
+import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { useToast } from "@chakra-ui/react";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
+
+  const toast = useToast();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,13 +34,29 @@ function LoginForm() {
           mode: "no-cors",
         }
       );
+      console.log(response.data.message);
       if (response.status === 200) {
-        alert("Login Successful!!");
+        toast({
+          title: `Login`,
+          description: `Login Successful!`,
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
       } else {
         alert("Login Unsuccessful!!");
       }
     } catch (e) {
       alert("Error Occurred");
+      toast({
+        title: `Login`,
+        description: e.response.data.message,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
       console.log(e);
     }
     console.log("Form data submitted:", formData);
@@ -51,37 +71,52 @@ function LoginForm() {
             alt='Your Image'
           />
         </div>
-        <div className='col-md-4'>
+        <div className='col-md-5'>
           <div className='card'>
-            <div className='card-body'>
-              <form onSubmit={handleSubmit}>
-                <div className='form-group'>
-                  <label htmlFor='username'>Username:</label>
-                  <input
-                    type='text'
-                    className='form-control'
-                    id='username'
-                    name='username'
-                    value={formData.username}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='password'>Password:</label>
-                  <input
-                    type='password'
-                    className='form-control'
-                    id='password'
-                    name='password'
-                    value={formData.password}
-                    onChange={handleChange}
-                  />
-                </div>
-                <button type='submit' className='btn btn-dark'>
-                  Login
-                </button>
-              </form>
-            </div>
+            <form className='login-form' onSubmit={handleSubmit}>
+              <h1 className='Heading'>Log in to your account</h1>
+              <p className='para'>
+                Unlock the door to a brighter, healthier future. Log in to
+                embark on your therapy journey and take the first step toward
+                well-being and happiness.
+              </p>
+              <div className='form-group'>
+                <label htmlFor='username'>Username:</label>
+                <input
+                  type='text'
+                  className='form-control'
+                  id='username'
+                  name='username'
+                  value={formData.username}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='password'>Password:</label>
+                <input
+                  type='password'
+                  className='form-control'
+                  id='password'
+                  name='password'
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+                <p className='forget'>
+                  <Link to='/' className='forget-link'>
+                    Forget Password?
+                  </Link>
+                </p>
+              </div>
+              <button type='submit' className='btn btn-dark'>
+                Login
+              </button>
+              <p className='create'>
+                Don't have an account?{" "}
+                <Link to='create_account' className='forget-link'>
+                  Sign up
+                </Link>
+              </p>
+            </form>
           </div>
         </div>
       </div>
