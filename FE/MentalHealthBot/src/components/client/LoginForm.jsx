@@ -33,12 +33,10 @@ function LoginForm() {
           },
         }
       );
-      // console.log(response.data.message);
-      // console.log(response.status);
       if (response.status === 200) {
         toast({
           title: `Login`,
-          description: `Login Successful!`,
+          description: response.data.message,
           status: "success",
           duration: 2000,
           isClosable: true,
