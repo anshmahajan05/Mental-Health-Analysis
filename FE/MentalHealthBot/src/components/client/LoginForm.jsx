@@ -34,16 +34,25 @@ function LoginForm() {
         }
       );
       if (response.status === 200) {
-        toast({
-          title: `Login`,
-          description: response.data.message,
-          status: "success",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-        });
-      } else {
-        alert("Login Unsuccessful!!");
+        if (response.login_status === 1) {
+          toast({
+            title: `Login`,
+            description: response.data.message,
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+          });
+        } else {
+          toast({
+            title: `Login`,
+            description: response.data.message,
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+          });
+        }
       }
     } catch (e) {
       toast({

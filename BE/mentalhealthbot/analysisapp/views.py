@@ -49,6 +49,7 @@ class login(APIView):
                 "access_token": access_token,
                 "id": user.id,
                 "refresh": str(refresh),
+                "login_status": 1,
             }
             subject = "Login Notification"
             message = f"Hello {user.name}, You have been signed in successfully."
@@ -56,9 +57,7 @@ class login(APIView):
             to_email = [user.email]
             mail_send(subject, message, from_email, to_email)
         else:
-            data = {
-                "message": "invalid credentials",
-            }
+            data = {"message": "invalid credentials", "login_status": 0}
         return Response(data, status=status.HTTP_200_OK)
 
 
