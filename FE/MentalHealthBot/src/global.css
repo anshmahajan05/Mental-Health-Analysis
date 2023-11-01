@@ -143,3 +143,9 @@
     text-shadow: 10px 20px 30px skyblue;
   }
 }
+
+@media screen and (max-width: 600px) {
+  .login-container {
+    display: block;
+  }
+}
