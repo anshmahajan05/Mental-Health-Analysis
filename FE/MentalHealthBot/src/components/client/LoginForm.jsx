@@ -31,10 +31,10 @@ function LoginForm() {
             "Content-Type": "application/json", // Set the content type of the request
             // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your access token or any other custom headers
           },
-          mode: "no-cors",
         }
       );
-      console.log(response.data.message);
+      // console.log(response.data.message);
+      // console.log(response.status);
       if (response.status === 200) {
         toast({
           title: `Login`,
@@ -48,7 +48,6 @@ function LoginForm() {
         alert("Login Unsuccessful!!");
       }
     } catch (e) {
-      alert("Error Occurred");
       toast({
         title: `Login`,
         description: e.response.data.message,
@@ -59,7 +58,7 @@ function LoginForm() {
       });
       console.log(e);
     }
-    console.log("Form data submitted:", formData);
+    // console.log("Form data submitted:", formData);
   };
 
   return (
