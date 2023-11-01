@@ -17,52 +17,62 @@ function NavBar() {
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto' style={{ marginLeft: "auto" }}>
           <Nav.Link
+            className='navLink'
             as={Link}
             to='/'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
-              fontWeight: "700",
+              fontWeight: "500",
+              fontSize: "20px",
             }}>
             Home
           </Nav.Link>
           <Nav.Link
+            className='navLink'
             as={Link}
             to='/login'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
-              fontWeight: "700",
+              fontWeight: "500",
+              fontSize: "20px",
             }}>
             Login
           </Nav.Link>
           <Nav.Link
+            className='navLink'
             as={Link}
             to='/register'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
-              fontWeight: "700",
+              fontWeight: "500",
+              fontSize: "20px",
             }}>
             Register
           </Nav.Link>
           <Nav.Link
+            className='navLink'
             as={Link}
             to='/therapist'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
-              fontWeight: "700",
+              fontWeight: "500",
+              fontSize: "20px",
             }}>
             For Therapist
           </Nav.Link>
           <Nav.Link
+            className='navLink'
             as={Link}
             to='/patient'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
-              fontWeight: "700",
+              fontWeight: "500",
+              fontSize: "20px",
             }}>
             For Patients
           </Nav.Link>
