@@ -4,9 +4,14 @@
 .app-name {
   font-family: Ballet;
   font-size: 30px;
+  animation: mymove 5s infinite;
 }
 
 /* Login Form */
+
+/* .container {
+    background: linear-gradient(90deg, white, );
+} */
 
 .card {
   border: none;
@@ -62,6 +67,7 @@
 
 .login-form h1 {
   text-align: center;
+  animation: mymove 5s infinite;
 }
 
 .login-form .para {
@@ -74,6 +80,7 @@
   color: rgb(69, 74, 94);
   text-align: center;
   padding: 20px;
+  animation: mymove 5s infinite;
 }
 
 .form-group {
@@ -106,4 +113,10 @@
 
 form button:hover {
   background-color: #0056b3;
+}
+
+@keyframes mymove {
+  50% {
+    text-shadow: 10px 20px 30px skyblue;
+  }
 }

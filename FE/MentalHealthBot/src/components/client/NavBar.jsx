@@ -16,19 +16,54 @@ function NavBar() {
       <Navbar.Toggle aria-controls='basic-navbar-nav' />
       <Navbar.Collapse id='basic-navbar-nav'>
         <Nav className='ml-auto' style={{ marginLeft: "auto" }}>
-          <Nav.Link as={Link} to='/'>
+          <Nav.Link
+            as={Link}
+            to='/'
+            style={{
+              paddingLeft: "35px",
+              paddingRight: "35px",
+              fontWeight: "700",
+            }}>
             Home
           </Nav.Link>
-          <Nav.Link as={Link} to='/login'>
+          <Nav.Link
+            as={Link}
+            to='/login'
+            style={{
+              paddingLeft: "35px",
+              paddingRight: "35px",
+              fontWeight: "700",
+            }}>
             Login
           </Nav.Link>
-          <Nav.Link as={Link} to='/register'>
+          <Nav.Link
+            as={Link}
+            to='/register'
+            style={{
+              paddingLeft: "35px",
+              paddingRight: "35px",
+              fontWeight: "700",
+            }}>
             Register
           </Nav.Link>
-          <Nav.Link as={Link} to='/therapist'>
+          <Nav.Link
+            as={Link}
+            to='/therapist'
+            style={{
+              paddingLeft: "35px",
+              paddingRight: "35px",
+              fontWeight: "700",
+            }}>
             For Therapist
           </Nav.Link>
-          <Nav.Link as={Link} to='/patient'>
+          <Nav.Link
+            as={Link}
+            to='/patient'
+            style={{
+              paddingLeft: "35px",
+              paddingRight: "35px",
+              fontWeight: "700",
+            }}>
             For Patients
           </Nav.Link>
         </Nav>
