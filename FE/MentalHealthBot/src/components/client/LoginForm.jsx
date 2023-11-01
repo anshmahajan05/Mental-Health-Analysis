@@ -86,6 +86,7 @@ function LoginForm() {
                   name='username'
                   value={formData.username}
                   onChange={handleChange}
+                  placeholder='Enter Username'
                 />
               </div>
               <div className='form-group'>
@@ -97,6 +98,7 @@ function LoginForm() {
                   name='password'
                   value={formData.password}
                   onChange={handleChange}
+                  placeholder='Enter Password'
                 />
                 <p className='forget'>
                   <Link to='/' className='forget-link'>
