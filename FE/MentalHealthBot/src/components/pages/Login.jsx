@@ -1,5 +1,5 @@
-import NavBar from "./components/client/NavBar";
-import LoginForm from "./components/client/LoginForm";
+import NavBar from "../client/NavBar";
+import LoginForm from "../client/LoginForm";
 
 const Login = () => {
   return (
