@@ -315,6 +315,11 @@ def day_end_sp():
         wh_sumamry = pd.read_sql_query(sql_query, engine)
         print("executed successfully")
         print(wh_sumamry)
+        subject = "checkandupdatesubscription - Done"
+        message = "Day end SP Execution Success"
+        from_email = settings.EMAIL_HOST_USER
+        to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
+        mail_send(subject, message, from_email, to_email)
     except Exception as e:
         print("Error executing wh_sumamry query:", e)
         sp_exec = SP_execution()
@@ -322,4 +327,9 @@ def day_end_sp():
         sp_exec.sp_desc = e
         sp_exec.executed_by = "system"
         sp_exec.save()
+        subject = "checkandupdatesubscription - Failed"
+        message = e
+        from_email = settings.EMAIL_HOST_USER
+        to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
+        mail_send(subject, message, from_email, to_email)
     return True
