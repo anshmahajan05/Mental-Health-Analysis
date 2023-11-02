@@ -294,4 +294,5 @@ class ConfirmBooking(APIView):
             context["Therapist"] = merged_df.to_dict(orient="records")
         else:
             context["Error"] = "User type doesnot exist"
+            return JsonResponse(context, status=status.HTTP_400_BAD_REQUEST)
         return JsonResponse(context, status=status.HTTP_200_OK)
