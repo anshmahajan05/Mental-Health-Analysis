@@ -7,7 +7,7 @@ import { useToast } from "@chakra-ui/react";
 function SignUpPage() {
   const [formData, setFormData] = useState({
     name:"",
-    contactno:0,
+    contactno:null,
     address:"",
     email:"",
     username: "",
@@ -40,62 +40,68 @@ function SignUpPage() {
   }
 
   const handleSubmit = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   const response = await axios.post(
-    //     "http://127.0.0.1:8000/mentalhealth/login/",
-    //     JSON.stringify(formData),
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json", // Set the content type of the request
-    //         // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your access token or any other custom headers
-    //       },
-    //     }
-    //   );
-    //   if (response.status === 200) {
-    //     if (response.login_status === 1) {
-    //       toast({
-    //         title: `Login`,
-    //         description: response.data.message,
-    //         status: "success",
-    //         duration: 2000,
-    //         isClosable: true,
-    //         position: "top",
-    //       });
-    //     } else {
-    //       toast({
-    //         title: `Login`,
-    //         description: response.data.message,
-    //         status: "error",
-    //         duration: 2000,
-    //         isClosable: true,
-    //         position: "top",
-    //       });
-    //     }
-    //   }
-    // } catch (e) {
-    //   toast({
-    //     title: `Login`,
-    //     description: e.response.data.message,
-    //     status: "error",
-    //     duration: 2000,
-    //     isClosable: true,
-    //     position: "top",
-    //   });
-    //   console.log(e);
-    // }
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/mentalhealth/signup/",
+        JSON.stringify(formData),
+        {
+          headers: {
+            "Content-Type": "application/json", // Set the content type of the request
+            // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your access token or any other custom headers
+          },
+        }
+      );
+      if (response.status === 200) {
+          toast({
+            title: `Signup Successfull`,
+            description: response.data.message,
+            status: "success",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+          });
+        } else {
+          toast({
+            title: `Signup Failed`,
+            description: response.data.error,
+            status: "error",
+            duration: 2000,
+            isClosable: true,
+            position: "top",
+          });
+        }
+    } catch (e) {
+      toast({
+        title: `Error while signing up`,
+        description: e.response.data.error,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      console.log(e);
+    }
     // console.log("Form data submitted:", formData);
   };
 
   return (
     <div className='container'>
       <div className='login-container'>
-        {formData.type == "Customer" && <div className='image-container'>
+        {formData.type == "Customer"? 
+        <div className='image-container'>
           <img
             src='https://t3.ftcdn.net/jpg/04/00/38/86/360_F_400388679_dmUTdbK8sn5SSuP34VUrnaZAIZWysGKL.jpg'
             alt='Your Image'
           />
-        </div>}
+        </div> :
+        <div className='image-container'>
+        <img
+          src='https://tse1.mm.bing.net/th?id=OIP.9G_XjoxddkY3J2LM2Dw6hQHaE8&pid=Api&P=0&h=180'
+          alt='Your Image'
+        />
+      </div>
+        }
         <div className='col-md-5'>
           <div className='card'>
             <form className='login-form' onSubmit={handleSubmit}>
@@ -180,19 +186,14 @@ function SignUpPage() {
                   placeholder='Enter Password'
                   style={{ borderRadius: "10px" }}
                 />
-                <p className='forget'>
-                  <Link to='/' className='forget-link'>
-                    Forget Password?
-                  </Link>
-                </p>
               </div>
               <button type='submit' className='btn btn-dark'>
-                Login
+                Sign Up
               </button>
               <p className='create'>
-                Don't have an account?{" "}
-                <Link to='create_account' className='forget-link'>
-                  Sign up
+                Already have an account?{" "}
+                <Link to='/' className='forget-link'>
+                  Login
                 </Link>
               </p>
               {formData.type == "Customer"?<p className='create'>
@@ -210,12 +211,6 @@ function SignUpPage() {
             </form>
           </div>
         </div>
-        {formData.type == "Therapist" && <div className='image-container'>
-          <img
-            src='https://tse1.mm.bing.net/th?id=OIP.9G_XjoxddkY3J2LM2Dw6hQHaE8&pid=Api&P=0&h=180'
-            alt='Your Image'
-          />
-        </div>}
       </div>
     </div>
   );

@@ -34,7 +34,7 @@ function LoginForm() {
         }
       );
       if (response.status === 200) {
-        if (response.login_status === 1) {
+        if (response.data.login_status === 1) {
           toast({
             title: `Login`,
             description: response.data.message,
@@ -122,7 +122,7 @@ function LoginForm() {
               </button>
               <p className='create'>
                 Don't have an account?{" "}
-                <Link to='create_account' className='forget-link'>
+                <Link to='/register' className='forget-link'>
                   Sign up
                 </Link>
               </p>
