@@ -28,6 +28,7 @@ from django.db.models import Sum
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.core.mail import send_mail
 from django.conf import settings
+from sqlalchemy import create_engine
 
 
 @method_decorator(csrf_exempt, name="dispatch")
@@ -296,3 +297,28 @@ class ConfirmBooking(APIView):
             context["Error"] = "User type doesnot exist"
             return JsonResponse(context, status=status.HTTP_400_BAD_REQUEST)
         return JsonResponse(context, status=status.HTTP_200_OK)
+
+
+def day_end_sp():
+    DATABASE = "MentalHealthAnalysis"
+    USERNAME = "postgres"
+    PASSWORD = "root@123"
+    HOST = "localhost"
+    PORT = "5432"
+
+    engine = create_engine(
+        f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+    )
+
+    sql_query = f"""CALL public.checkandupdatesubscription()"""
+    try:
+        wh_sumamry = pd.read_sql_query(sql_query, engine)
+        print("executed successfully")
+        print(wh_sumamry)
+    except Exception as e:
+        print("Error executing wh_sumamry query:", e)
+        sp_exec = SP_execution()
+        sp_exec.sp_name = "checkandupdatesubscription"
+        sp_exec.sp_desc = e
+        sp_exec.executed_by = "system"
+        sp_exec.save()

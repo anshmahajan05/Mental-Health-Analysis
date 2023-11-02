@@ -1,6 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser, UserManager as DefaultUserManager, Group, Permission
+from django.contrib.auth.models import (
+    AbstractUser,
+    UserManager as DefaultUserManager,
+    Group,
+    Permission,
+)
+
 # Create your models here.
+
 
 class Mst_UsrTbl(AbstractUser):
     id = models.AutoField(primary_key=True)
@@ -12,6 +19,7 @@ class Mst_UsrTbl(AbstractUser):
     IsSubscribed = models.BooleanField(default=False)
     # Specify custom related_name value
 
+
 class SubscriptionTable(models.Model):
     UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, null=True)
     SubscriptionId = models.AutoField(primary_key=True)
@@ -19,10 +27,22 @@ class SubscriptionTable(models.Model):
     StartDate = models.DateField(null=True)
     EndDate = models.DateField(null=True)
 
+
 class BookingTbl(models.Model):
     BookingId = models.AutoField(primary_key=True)
-    UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_user')
-    ThreapistId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, related_name='bookings_as_therapist')
+    UserId = models.ForeignKey(
+        Mst_UsrTbl, on_delete=models.CASCADE, related_name="bookings_as_user"
+    )
+    ThreapistId = models.ForeignKey(
+        Mst_UsrTbl, on_delete=models.CASCADE, related_name="bookings_as_therapist"
+    )
     BookingDate = models.DateField(null=True)
     BookingTime = models.TimeField(null=True)
     approved_by_Threapist = models.BooleanField(default=False)
+
+
+class SP_execution(models.Model):
+    id = models.AutoField(primary_key=True)
+    sp_name = models.CharField(null=True)
+    sp_desc = models.TextField(null=True)
+    executed_by = models.CharField(null=True)
