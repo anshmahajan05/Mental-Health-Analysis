@@ -322,3 +322,4 @@ def day_end_sp():
         sp_exec.sp_desc = e
         sp_exec.executed_by = "system"
         sp_exec.save()
+    return True
