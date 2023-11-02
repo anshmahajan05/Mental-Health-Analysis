@@ -27,7 +27,6 @@ class SubscriptionTable(models.Model):
     StartDate = models.DateField(null=True)
     EndDate = models.DateField(null=True)
 
-
 class BookingTbl(models.Model):
     BookingId = models.AutoField(primary_key=True)
     UserId = models.ForeignKey(
@@ -46,3 +45,11 @@ class SP_execution(models.Model):
     sp_name = models.CharField(null=True)
     sp_desc = models.TextField(null=True)
     executed_by = models.CharField(null=True)
+
+class PastSubscriptionTable(models.Model):
+    id = models.AutoField(primary_key=True)
+    UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, null=True)
+    SubscriptionId = models.IntegerField(unique=True)
+    SubscriptionType = models.CharField(max_length=255, null=True)
+    StartDate = models.DateField(null=True)
+    EndDate = models.DateField(null=True)

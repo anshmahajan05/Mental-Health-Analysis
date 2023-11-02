@@ -301,41 +301,49 @@ class ConfirmBooking(APIView):
 
 def day_end_sp():
     import time
+
     print("!!!!!!!!!!!!!!!!SP execution Started!!!!!!!!!!!!!!!!")
     start_time = time.time()
     print("Start time: ", start_time)
     DATABASE = "MentalHealthAnalysis"
     USERNAME = "postgres"
-    PASSWORD = "root@123"
+    PASSWORD = "postgresDb"
     HOST = "localhost"
     PORT = "5432"
 
     engine = create_engine(
-        f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}"
+        f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}",
+        isolation_level="AUTOCOMMIT",
     )
 
-    sql_query = f"""CALL public.checkandupdatesubscription()"""
+    sql_query = f"""CALL public.checkandupdatesubscription();"""
     try:
         wh_sumamry = pd.read_sql_query(sql_query, engine)
         print("executed successfully")
         print(wh_sumamry)
-        subject = "checkandupdatesubscription - Done"
-        message = "Day end SP Execution Success"
-        from_email = settings.EMAIL_HOST_USER
-        to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
-        mail_send(subject, message, from_email, to_email)
     except Exception as e:
-        print("Error executing wh_sumamry query:", e)
+        print("Error executing query:", e)
         sp_exec = SP_execution()
         sp_exec.sp_name = "checkandupdatesubscription"
         sp_exec.sp_desc = e
         sp_exec.executed_by = "system"
         sp_exec.save()
-        subject = "checkandupdatesubscription - Failed"
-        message = e
-        from_email = settings.EMAIL_HOST_USER
-        to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
-        mail_send(subject, message, from_email, to_email)
+        # subject = "checkandupdatesubscription - Failed"
+        # message = e
+        # from_email = settings.EMAIL_HOST_USER
+        # to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
+        # mail_send(subject, message, from_email, to_email)
     print("End time: ", time.time())
-    print("Execution Time: ", time.time()-start_time)
+    print("Execution Time: ", time.time() - start_time)
+    current_date = datetime.now().date()
+    past = PastSubscriptionTable.objects.filter(EndDate=current_date).values_list(
+        "UserId"
+    )
+    users = Mst_UsrTbl.objects.filter(id__in=past).values_list("email")
+    email_list = [user[0] for user in users]
+    print(email_list)
+    subject = "Subscription Ended"
+    message = "Dear User, Hope this message found you well. Your subscription has been ended. To continue the service of well-being and aware of mental health, renew your subscription to continue the service. We will be happy to serve you again. \nMental Mate\nEmbrace your inner strength with Mental Mate, your trusted companion on the journey to better mental health!"
+    from_email = settings.EMAIL_HOST_USER
+    mail_send(subject, message, from_email, email_list)
     return True

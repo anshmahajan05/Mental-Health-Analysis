@@ -93,7 +93,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "MentalHealthAnalysis",
         "USER": "postgres",
-        "PASSWORD": "root@123",
+        "PASSWORD": "postgresDb",
         "HOST": "localhost",
         "PORT": "5432",
     }
