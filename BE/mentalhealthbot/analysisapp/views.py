@@ -300,6 +300,10 @@ class ConfirmBooking(APIView):
 
 
 def day_end_sp():
+    import time
+    print("!!!!!!!!!!!!!!!!SP execution Started!!!!!!!!!!!!!!!!")
+    start_time = time.time()
+    print("Start time: ", start_time)
     DATABASE = "MentalHealthAnalysis"
     USERNAME = "postgres"
     PASSWORD = "root@123"
@@ -332,4 +336,6 @@ def day_end_sp():
         from_email = settings.EMAIL_HOST_USER
         to_email = ["anshmahajan05102002@gmail.com", "nehamit009@gmail.com"]
         mail_send(subject, message, from_email, to_email)
+    print("End time: ", time.time())
+    print("Execution Time: ", time.time()-start_time)
     return True
