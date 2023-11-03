@@ -1,0 +1,36 @@
+
+
+.sidenav {
+    position: fixed; /* Add fixed positioning to make it cover the page corner */
+    top: 0;
+    left: 0;
+   height: 100vh;
+    background: linear-gradient(
+      19deg,
+      rgba(17, 18, 18, 0.83),
+      rgba(10, 6, 229, 0.84) 
+    );
+  }
+  
+ 
+  .navItem {
+    color: #fff;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    display: flex;
+    justify-content: start;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .Pad {
+    padding: 15px;
+  }
+  
+  .Pad path {
+    stroke: #ffffff;
+  }
+  

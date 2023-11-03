@@ -35,14 +35,15 @@ function LoginForm() {
       );
       if (response.status === 200) {
         if (response.data.login_status === 1) {
-          toast({
-            title: `Login`,
-            description: response.data.message,
-            status: "success",
-            duration: 2000,
-            isClosable: true,
-            position: "top",
-          });
+          // toast({
+          //   title: `Login`,
+          //   description: response.data.message,
+          //   status: "success",
+          //   duration: 2000,
+          //   isClosable: true,
+          //   position: "top",
+          // });
+          window.location.href="/subscription";
         } else {
           toast({
             title: `Login`,
