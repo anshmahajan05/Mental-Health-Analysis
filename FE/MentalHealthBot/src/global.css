@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ballet:opsz@16..72&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 .app-name {
   font-family: Ballet;
   font-size: 30px;
@@ -179,6 +180,18 @@
   font-weight: lighter;
   font-size: large;
 }
+
+
+
+body {
+  font-family: Roboto, sans-serif;
+}
+
+#chart {
+  max-width: 650px;
+  margin: 35px auto;
+}
+
 
 /* .login-form button:hover {
     background-color: #0056b3;
