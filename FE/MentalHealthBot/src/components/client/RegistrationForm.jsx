@@ -6,13 +6,13 @@ import { useToast } from "@chakra-ui/react";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
-    name:"",
-    contactno:null,
-    address:"",
-    email:"",
+    name: "",
+    contactno: null,
+    address: "",
+    email: "",
     username: "",
     password: "",
-    type:"Customer"
+    type: "Customer",
   });
 
   const toast = useToast();
@@ -26,7 +26,7 @@ function SignUpPage() {
   };
 
   const changeType = () => {
-    if(formData.type == "Customer"){
+    if (formData.type == "Customer") {
       setFormData({
         ...formData,
         type: "Therapist",
@@ -37,7 +37,7 @@ function SignUpPage() {
         type: "Customer",
       });
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -53,24 +53,24 @@ function SignUpPage() {
         }
       );
       if (response.status === 200) {
-          toast({
-            title: `Signup Successfull`,
-            description: response.data.message,
-            status: "success",
-            duration: 2000,
-            isClosable: true,
-            position: "top",
-          });
-        } else {
-          toast({
-            title: `Signup Failed`,
-            description: response.data.error,
-            status: "error",
-            duration: 2000,
-            isClosable: true,
-            position: "top",
-          });
-        }
+        toast({
+          title: `Signup Successfull`,
+          description: response.data.message,
+          status: "success",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
+      } else {
+        toast({
+          title: `Signup Failed`,
+          description: response.data.error,
+          status: "error",
+          duration: 2000,
+          isClosable: true,
+          position: "top",
+        });
+      }
     } catch (e) {
       toast({
         title: `Error while signing up`,
@@ -88,26 +88,28 @@ function SignUpPage() {
   return (
     <div className='container'>
       <div className={`login-container ${formData.type ==  "Customer" ? "flex-dir-row":"flex-dir-row-rev"}`}>
-        {formData.type == "Customer"? 
-        <div className='image-container'>
-          <img
-            src='https://t3.ftcdn.net/jpg/04/00/38/86/360_F_400388679_dmUTdbK8sn5SSuP34VUrnaZAIZWysGKL.jpg'
-            alt='Your Image'
-          />
-        </div> :
-        <div className='image-container'>
-        <img
-          src='https://tse1.mm.bing.net/th?id=OIP.9G_XjoxddkY3J2LM2Dw6hQHaE8&pid=Api&P=0&h=180'
-          alt='Your Image'
-        />
-      </div>
-        }
+        {formData.type == "Customer" ? (
+          <div className='image-container'>
+            <img
+              src='https://t3.ftcdn.net/jpg/04/00/38/86/360_F_400388679_dmUTdbK8sn5SSuP34VUrnaZAIZWysGKL.jpg'
+              alt='Your Image'
+            />
+          </div>
+        ) : (
+          <div className='image-container'>
+            <img
+              src='https://tse1.mm.bing.net/th?id=OIP.9G_XjoxddkY3J2LM2Dw6hQHaE8&pid=Api&P=0&h=180'
+              alt='Your Image'
+            />
+          </div>
+        )}
         <div className='col-md-5'>
           <div className='card'>
             <form className='login-form' onSubmit={handleSubmit}>
               <h1 className='Heading'>Sign Up</h1>
               <p className='para'>
-              Embrace your inner strength with Mental Mate, your trusted companion on the journey to better mental health!
+                Embrace your inner strength with Mental Mate, your trusted
+                companion on the journey to better mental health!
               </p>
               <div className='form-group'>
                 <label htmlFor='name'>Name:</label>
@@ -120,6 +122,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Enter Name'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -133,6 +136,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Contact No.'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -146,6 +150,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Address'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -159,6 +164,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Email'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -172,6 +178,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Enter Username'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <div className='form-group'>
@@ -185,6 +192,7 @@ function SignUpPage() {
                   onChange={handleChange}
                   placeholder='Enter Password'
                   style={{ borderRadius: "10px" }}
+                  required
                 />
               </div>
               <button type='submit' className='btn btn-dark'>
@@ -196,18 +204,21 @@ function SignUpPage() {
                   Login
                 </Link>
               </p>
-              {formData.type == "Customer"?<p className='create'>
-                Sign Up as a Therapist?{" "}
-                <text  className='forget-link' onClick={changeType}>
-                  Click Here
-                </text>
-              </p> :
-              <p className='create'>
-                Sign Up as a Customer?{" "}
-                <text  className='forget-link' onClick={changeType}>
-                  Click Here
-                </text>
-              </p>}
+              {formData.type == "Customer" ? (
+                <p className='create'>
+                  Sign Up as a Therapist?{" "}
+                  <text className='forget-link' onClick={changeType}>
+                    Click Here
+                  </text>
+                </p>
+              ) : (
+                <p className='create'>
+                  Sign Up as a Customer?{" "}
+                  <text className='forget-link' onClick={changeType}>
+                    Click Here
+                  </text>
+                </p>
+              )}
             </form>
           </div>
         </div>
