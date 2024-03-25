@@ -9,3 +9,4 @@ djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
 apscheduler
 python-dotenv
+google-generativeai

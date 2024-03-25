@@ -29,6 +29,16 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.core.mail import send_mail
 from django.conf import settings
 from sqlalchemy import create_engine
+import google.generativeai as genai
+from pathlib import Path
+import os
+BASE_DIR = Path(__file__).resolve().parent.parent
+import dotenv
+
+dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+API_KEY = os.getenv("GOOGLE_API_KEY")
+genai.configure(api_key=API_KEY)
 
 from django.conf import settings
 db_setting = settings.DATABASES['default']
@@ -350,3 +360,92 @@ def day_end_sp():
     from_email = settings.EMAIL_HOST_USER
     mail_send(subject, message, from_email, email_list)
     return True
+
+def get_gemini_response(question, chat):
+    response = chat.send_message(question)
+    return response
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class Chatbot(APIView):
+    def post(self, request):
+        context = {}
+        model = genai.GenerativeModel("gemini-pro")
+        chat = model.start_chat(history=[])
+        message = request.data.get('message')
+        chatid = request.data.get('ChatId')
+
+        messageRecieved = ChatMessages()
+        messageRecieved.ChatId = chatid
+        messageRecieved.MessageContent = message
+        messageRecieved.SentDateTime = datetime.now()
+        messageRecieved.Sender = "User"
+        messageRecieved.Status = "success"
+        messageRecieved.save()
+        
+        message += '\n\n Answer this like you are a mental health chatbot.'
+        result = get_gemini_response(message, chat)
+        reply = result.text
+        context['reply'] = reply
+
+        messageSend = ChatMessages()
+        messageSend.ChatId = chatid
+        messageSend.MessageContent = reply
+        messageSend.SentDateTime = datetime.now()
+        messageSend.Sender = "Bot"
+        messageSend.Status = "success"
+        messageSend.save()
+
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class NewChat(APIView):
+    def post(self, request):
+        context = {}
+        data = request.data
+        UserId = request.user.id
+        isTestGiven = True if request.data.get('isTestGiven')=='true' else False
+
+        newchat = ChatHistory()
+        newchat.UserId = UserId
+        newchat.isTestGiven = isTestGiven
+        newchat.TestId = request.data.get('TestId')
+        newchat.DateAndTime = datetime.now()
+        newchat.save()
+
+        context['chatid'] = newchat.id
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class chathistory(APIView):
+    def get(self, request):
+        context = {}
+        UserId = request.user.id
+
+        chats_df = pd.DataFrame(
+            ChatHistory.objects.filter(
+                UserId=UserId
+            ).values()
+        )
+
+        chats = chats_df.to_dict(orient='records')
+        context['chats'] = chats
+        return JsonResponse(context, status=status.HTTP_200_OK)
+    
+    def post(self, request):
+        UserId = request.user.id
+        context = {}
+
+        chatid = request.data.get('ChatId')
+        messages_df = pd.DataFrame(
+            ChatMessages.objects.filter(
+                ChatId=chatid
+            )
+        )
+
+        messages = messages_df.to_dict(orient='records')
+        context['messages'] = messages
+
+        return JsonResponse(context, status=status.HTTP_200_OK)
