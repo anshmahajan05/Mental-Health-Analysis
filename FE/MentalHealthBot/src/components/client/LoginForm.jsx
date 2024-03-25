@@ -3,6 +3,7 @@ import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import URL from "../../EndPoint";
 
 function LoginForm() {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ function LoginForm() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/mentalhealth/login/",
+        `${URL}mentalhealth/login/`,
         JSON.stringify(formData),
         {
           headers: {
@@ -43,7 +44,7 @@ function LoginForm() {
           //   isClosable: true,
           //   position: "top",
           // });
-          window.location.href="/subscription";
+          window.location.href = "/subscription";
         } else {
           toast({
             title: `Login`,

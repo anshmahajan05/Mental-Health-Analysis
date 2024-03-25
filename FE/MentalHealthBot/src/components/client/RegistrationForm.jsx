@@ -3,6 +3,7 @@ import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
+import URL from "../../EndPoint";
 
 function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -43,7 +44,7 @@ function SignUpPage() {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://127.0.0.1:8000/mentalhealth/signup/",
+        `${URL}mentalhealth/signup/`,
         JSON.stringify(formData),
         {
           headers: {
@@ -87,7 +88,10 @@ function SignUpPage() {
 
   return (
     <div className='container'>
-      <div className={`login-container ${formData.type ==  "Customer" ? "flex-dir-row":"flex-dir-row-rev"}`}>
+      <div
+        className={`login-container ${
+          formData.type == "Customer" ? "flex-dir-row" : "flex-dir-row-rev"
+        }`}>
         {formData.type == "Customer" ? (
           <div className='image-container'>
             <img
