@@ -443,7 +443,7 @@ class chathistory(APIView):
         messages_df = pd.DataFrame(
             ChatMessages.objects.filter(
                 ChatId=chatid
-            )
+            ).values()
         )
 
         messages = messages_df.to_dict(orient='records')
