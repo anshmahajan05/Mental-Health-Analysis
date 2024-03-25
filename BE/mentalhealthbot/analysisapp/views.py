@@ -30,6 +30,9 @@ from django.core.mail import send_mail
 from django.conf import settings
 from sqlalchemy import create_engine
 
+from django.conf import settings
+db_setting = settings.DATABASES['default']
+
 
 @method_decorator(csrf_exempt, name="dispatch")
 class login(APIView):
@@ -305,11 +308,11 @@ def day_end_sp():
     print("!!!!!!!!!!!!!!!!SP execution Started!!!!!!!!!!!!!!!!")
     start_time = time.time()
     print("Start time: ", start_time)
-    DATABASE = "MentalHealthAnalysis"
-    USERNAME = "postgres"
-    PASSWORD = "postgresDb"
-    HOST = "localhost"
-    PORT = "5432"
+    DATABASE = db_setting['NAME']
+    USERNAME = db_setting['USER']
+    PASSWORD = db_setting['PASSWORD']
+    HOST = db_setting['HOST']
+    PORT = db_setting['PORT']
 
     engine = create_engine(
         f"postgresql://{USERNAME}:{PASSWORD}@{HOST}:{PORT}/{DATABASE}",
