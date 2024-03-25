@@ -314,6 +314,8 @@ class ConfirmBooking(APIView):
 
 def day_end_sp():
     import time
+    from django.conf import settings
+    db_setting = settings.DATABASES['default']
 
     print("!!!!!!!!!!!!!!!!SP execution Started!!!!!!!!!!!!!!!!")
     start_time = time.time()
