@@ -58,6 +58,7 @@ PGUSER="MentalHealthAdministrator"
 PGPORT="5432"
 PGDATABASE="postgres"
 PGPASSWORD="botproject12#"
+GOOGLE_API_KEY = "AIzaSyBLcsOVZuYNSXQTk70HzvIMZ76PTpvvWy8"
 ```
 
  You can change the Database config in setting.py ( for local db setup ) 
