@@ -53,3 +53,38 @@ class PastSubscriptionTable(models.Model):
     SubscriptionType = models.CharField(max_length=255, null=True)
     StartDate = models.DateField(null=True)
     EndDate = models.DateField(null=True)
+
+class TestDetails(models.Model):
+    id = models.AutoField(primary_key=True)
+
+class ChatHistory(models.Model):
+    id = models.AutoField(primary_key=True)
+    UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, null=True)
+    isTestGiven = models.BooleanField(default=False)
+    TestId = models.ForeignKey(TestDetails, on_delete=models.CASCADE, null=True)
+    DateAndTime = models.DateTimeField()
+
+class ChatMessages(models.Model):
+    id = models.AutoField(primary_key=True)
+    ChatId = models.ForeignKey(ChatHistory,on_delete=models.CASCADE, null=True)
+    MessageContent = models.TextField()
+    SentDateTime = models.DateTimeField()
+    SENDERS = [
+        ('Chatbot', 'Chatbot'),
+        ('User', 'User'),
+    ]
+    STATUS = [
+        ('Success' , 'Success'),
+        ('Error', 'Error'),
+    ]
+    Sender = models.TextField(choices = SENDERS)
+    Status = models.TextChoices(choices = STATUS)
+    
+    
+
+    
+
+
+
+
+
