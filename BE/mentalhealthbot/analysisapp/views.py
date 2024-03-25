@@ -415,6 +415,7 @@ class NewChat(APIView):
         newchat.save()
 
         context['chatid'] = newchat.id
+        context['message'] = "New chat started"
         return JsonResponse(context, status=status.HTTP_200_OK)
 
 @authentication_classes([JWTAuthentication])
