@@ -27,6 +27,7 @@ class SubscriptionTable(models.Model):
     StartDate = models.DateField(null=True)
     EndDate = models.DateField(null=True)
 
+
 class BookingTbl(models.Model):
     BookingId = models.AutoField(primary_key=True)
     UserId = models.ForeignKey(
@@ -42,9 +43,9 @@ class BookingTbl(models.Model):
 
 class SP_execution(models.Model):
     id = models.AutoField(primary_key=True)
-    sp_name = models.CharField(null=True)
+    sp_name = models.CharField(max_length=100, null=True)
     sp_desc = models.TextField(null=True)
-    executed_by = models.CharField(null=True)
+    executed_by = models.CharField(max_length=100, null=True)
 
 class PastSubscriptionTable(models.Model):
     id = models.AutoField(primary_key=True)
@@ -62,29 +63,13 @@ class ChatHistory(models.Model):
     UserId = models.ForeignKey(Mst_UsrTbl, on_delete=models.CASCADE, null=True)
     isTestGiven = models.BooleanField(default=False)
     TestId = models.ForeignKey(TestDetails, on_delete=models.CASCADE, null=True)
-    DateAndTime = models.DateTimeField()
+    DateAndTime = models.DateTimeField(null=True)
+
 
 class ChatMessages(models.Model):
     id = models.AutoField(primary_key=True)
-    ChatId = models.ForeignKey(ChatHistory,on_delete=models.CASCADE, null=True)
+    ChatId = models.ForeignKey(ChatHistory, on_delete=models.CASCADE, null=True)
     MessageContent = models.TextField()
     SentDateTime = models.DateTimeField()
-    SENDERS = [
-        ('Chatbot', 'Chatbot'),
-        ('User', 'User'),
-    ]
-    STATUS = [
-        ('Success' , 'Success'),
-        ('Error', 'Error'),
-    ]
-    Sender = models.TextField(choices = SENDERS)
-    Status = models.TextChoices(choices = STATUS)
-    
-    
-
-    
-
-
-
-
-
+    Sender = models.TextField()
+    Status = models.TextField()
