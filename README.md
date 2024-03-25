@@ -46,9 +46,19 @@ To learn more about Django  follow [this](https://www.w3schools.com/django/djang
 
 Install the necessary libraries using cmd:
    ```bash
-   pip install requirements.txt
+   pip install -r requirements.txt
    ```
     
+After installing the requirements, create a .env file in `./BE/mentalhealthbot` and add the following code snippet into .env file.
+
+```bash
+PGENGINE="django.db.backends.postgresql_psycopg2"
+PGHOST="mentalhealth.postgres.database.azure.com"
+PGUSER="MentalHealthAdministrator"
+PGPORT="5432"
+PGDATABASE="postgres"
+PGPASSWORD="botproject12#"
+```
 
  You can change the Database config in setting.py ( for local db setup ) 
 
