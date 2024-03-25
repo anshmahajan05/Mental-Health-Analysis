@@ -7,7 +7,7 @@ def start_scheduler():
     from .views import day_end_sp
 
     scheduler = BackgroundScheduler()
-    scheduler.add_job(day_end_sp, "cron", hour=20, minute=45)
+    scheduler.add_job(day_end_sp, "cron", hour=11, minute=59)
 
     if not scheduler.running:
         scheduler.start()
