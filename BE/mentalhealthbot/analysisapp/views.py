@@ -431,7 +431,15 @@ class NewChat(APIView):
         newchat.DateAndTime = datetime.now()
         newchat.save()
 
-        context['chatid'] = newchat.id
+        reply_dict = {
+            'id': newchat.id,
+            'UserId_id': user.id,
+            'isTestGiven': isTestGiven,
+            'TestId': request.data.get('TestId'),
+            'DateAndTime': datetime.now()
+        }
+
+        context['chatid'] = reply_dict
         context['message'] = "New chat started"
         return JsonResponse(context, status=status.HTTP_200_OK)
 
