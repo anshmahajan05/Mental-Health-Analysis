@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import URL from "../../EndPoint";
 
@@ -17,6 +17,17 @@ function SignUpPage() {
   });
 
   const toast = useToast();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const checkToken = async() => {
+      const  token = localStorage.getItem("token");
+      if (token) {
+        navigate("/subscription")
+      }
+    };
+    checkToken();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,6 +73,7 @@ function SignUpPage() {
           isClosable: true,
           position: "top",
         });
+        navigate("/");
       } else {
         toast({
           title: `Signup Failed`,
@@ -75,7 +87,7 @@ function SignUpPage() {
     } catch (e) {
       toast({
         title: `Error while signing up`,
-        description: e.response.data.error,
+        description: e.response?.data.error,
         status: "error",
         duration: 2000,
         isClosable: true,

@@ -4,7 +4,7 @@ import ProfileCard from "../client/ProfileCard";
 import BarChart from "../charts/BarChart";
 import LineChart from "../charts/lineChart";
 
-const Login = () => {
+const Dashboard = () => {
   
 
   return (
@@ -43,4 +43,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Dashboard;
