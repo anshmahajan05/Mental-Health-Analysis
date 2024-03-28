@@ -377,21 +377,28 @@ class Chatbot(APIView):
         message = request.data.get('message')
         chatid = request.data.get('ChatId')
 
+        chat_obj = ChatHistory.objects.get(id=chatid)
+
         messageRecieved = ChatMessages()
-        messageRecieved.ChatId = chatid
+        messageRecieved.ChatId = chat_obj
         messageRecieved.MessageContent = message
         messageRecieved.SentDateTime = datetime.now()
         messageRecieved.Sender = "User"
         messageRecieved.Status = "success"
         messageRecieved.save()
+
+        try:
+            message += '\n\n Answer this like you are a mental health chatbot.'
+            result = get_gemini_response(message, chat)
+            reply = result.text
+            reply = reply.replace("\n", "<br>")
+        except:
+            reply = "Sorry, I couldn't understand your message correctly."
         
-        message += '\n\n Answer this like you are a mental health chatbot.'
-        result = get_gemini_response(message, chat)
-        reply = result.text
         context['reply'] = reply
 
         messageSend = ChatMessages()
-        messageSend.ChatId = chatid
+        messageSend.ChatId = chat_obj
         messageSend.MessageContent = reply
         messageSend.SentDateTime = datetime.now()
         messageSend.Sender = "Bot"
@@ -406,11 +413,11 @@ class NewChat(APIView):
     def post(self, request):
         context = {}
         data = request.data
-        UserId = request.user.id
+        user = request.user
         isTestGiven = True if request.data.get('isTestGiven')=='true' else False
 
         newchat = ChatHistory()
-        newchat.UserId = UserId
+        newchat.UserId = user
         newchat.isTestGiven = isTestGiven
         newchat.TestId = request.data.get('TestId')
         newchat.DateAndTime = datetime.now()
@@ -429,7 +436,7 @@ class chathistory(APIView):
 
         chats_df = pd.DataFrame(
             ChatHistory.objects.filter(
-                UserId=UserId
+                UserId_id=UserId
             ).values()
         )
 
@@ -444,7 +451,7 @@ class chathistory(APIView):
         chatid = request.data.get('ChatId')
         messages_df = pd.DataFrame(
             ChatMessages.objects.filter(
-                ChatId=chatid
+                ChatId_id=chatid
             ).values()
         )
 
