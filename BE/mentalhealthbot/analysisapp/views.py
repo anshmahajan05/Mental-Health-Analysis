@@ -394,8 +394,6 @@ class Chatbot(APIView):
             reply = reply.replace("\n", "<br>")
         except:
             reply = "Sorry, I couldn't understand your message correctly."
-        
-        context['reply'] = reply
 
         messageSend = ChatMessages()
         messageSend.ChatId = chat_obj
@@ -404,6 +402,10 @@ class Chatbot(APIView):
         messageSend.Sender = "Bot"
         messageSend.Status = "success"
         messageSend.save()
+
+        reply_df = pd.DataFrame(messageSend.values())
+        reply_dict = reply_df.to_dict(orient='records')
+        context['reply'] = reply_dict[0]
 
         return JsonResponse(context, status=status.HTTP_200_OK)
 
