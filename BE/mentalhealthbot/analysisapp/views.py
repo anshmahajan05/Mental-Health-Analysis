@@ -403,9 +403,15 @@ class Chatbot(APIView):
         messageSend.Status = "success"
         messageSend.save()
 
-        reply_df = pd.DataFrame(messageSend.values())
-        reply_dict = reply_df.to_dict(orient='records')
-        context['reply'] = reply_dict[0]
+        reply_dict = {
+            'id': messageSend.id,
+            'ChatId': chat_obj.id,
+            'MessageContent': reply,
+            'SentDateTime': datetime.now(),
+            'Sender': 'Bot',
+            'Status': 'success'
+        }
+        context['reply'] = reply_dict
 
         return JsonResponse(context, status=status.HTTP_200_OK)
 
