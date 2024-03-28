@@ -393,7 +393,7 @@ class Chatbot(APIView):
             reply = result.text
             reply = reply.replace("\n", "<br>")
         except:
-            reply = "Sorry, I couldn't understand your message correctly."
+            reply = "Sorry, I couldn't understand your message correctly. <br> Could you tell me more about whats happenning?"
 
         messageSend = ChatMessages()
         messageSend.ChatId = chat_obj
