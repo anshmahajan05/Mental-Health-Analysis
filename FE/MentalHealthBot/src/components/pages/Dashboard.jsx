@@ -1,8 +1,8 @@
 import NavBar from "../client/NavBar";
 import 'bootstrap/dist/css/bootstrap.min.css'; 
 import ProfileCard from "../client/ProfileCard";
-import BarChart from "../charts/BarChart";
-import LineChart from "../charts/lineChart";
+// import BarChart from "../charts/BarChart";
+// import LineChart from "../charts/lineChart";
 
 const Login = () => {
   
@@ -23,10 +23,10 @@ const Login = () => {
       >
         <div style={{ display:"flex", padding: "5px", flexDirection: "row", flexWrap:"wrap", margin:"auto", justifyContent:"center" }}>
           <div className="dashboard-chart">
-            <BarChart />
+            {/* <BarChart /> */}
           </div>
           <div className="dashboard-chart">
-            <LineChart />
+            {/* <LineChart /> */}
             </div>
         </div>
         <div style={{ border:"none", height:"300px", flexWrap:"wrap", width:"100%" }} className="dashboard-chart">
