@@ -1,5 +1,4 @@
-[
-    {
+[{
         "question": "How many employees does your company or organization have?",
         "option": [
             "1-5",
@@ -214,6 +213,389 @@
             "Yes, they all did",
             "I don't know",
             "Some did"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Were you aware of the options for mental health care provided by your previous employers?",
+        "option": [
+            "N/A (not currently aware)",
+            "I was aware of some",
+            "Yes, I was aware of all of them",
+            "No, I only became aware later"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Did your previous employers ever formally discuss mental health (as part of a wellness campaign or other official communication)?",
+        "option": [
+            "I don't know",
+            "None did",
+            "Some did",
+            "Yes, they all did"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Did your previous employers provide resources to learn more about mental health issues and how to seek help?",
+        "option": [
+            "None did",
+            "Some did",
+            "Yes, they all did"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Was your anonymity protected if you chose to take advantage of mental health or substance abuse treatment resources with previous employers?",
+        "option": [
+            "I don't know",
+            "Yes, always",
+            "Sometimes",
+            "No"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you think that discussing a mental health disorder with previous employers would have negative consequences?",
+        "option": [
+            "I don't know",
+            "Some of them",
+            "Yes, all of them",
+            "None of them"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you think that discussing a physical health issue with previous employers would have negative consequences?",
+        "option": [
+            "Some of them",
+            "Yes, all of them",
+            "None of them"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you have been willing to discuss a mental health issue with your previous co-workers?",
+        "option": [
+            "Some of my previous employers",
+            "No, at none of my previous employers",
+            "Yes, at all of my previous employers"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you have been willing to discuss a mental health issue with your direct supervisor(s)?",
+        "option": [
+            "Some of my previous employers",
+            "I don't know ",
+            "No, at none of my previous employers",
+            "Yes, at all of my previous employers"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Did you feel that your previous employers took mental health as seriously as physical health?",
+        "option": [
+            "Some did",
+            "I don't know ",
+            "None did",
+            "Yes, they all did"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Did you hear of or observe negative consequences for co-workers with mental health issues in your previous workplaces?",
+        "option": [
+            "None of them",
+            "Some of them",
+            "Yes, all of them"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you be willing to bring up a physical health issue with a potential employer in an interview?",
+        "option": [
+            "Maybe",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Would you bring up a mental health issue with a potential employer in an interview?",
+        "option": [
+            "Maybe",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you feel that being identified as a person with a mental health issue would hurt your career?",
+        "option": [
+            "Maybe",
+            "No, I don't think it would",
+            "Yes, I think it would",
+            "No, it has not",
+            "Yes, it has"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you think that team members/co-workers would view you more negatively if they knew you suffered from a mental health issue?",
+        "option": [
+            "Maybe",
+            "No, I don't think they would",
+            "Yes, I think they would",
+            "No, they do not",
+            "Yes, they do"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "How willing would you be to share with friends and family that you have a mental illness?",
+        "option": [
+            "Somewhat open",
+            "Not applicable to me (I do not have a mental illness)",
+            "Very open",
+            "Not open at all",
+            "Neutral",
+            "Somewhat not open"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have you observed or experienced an unsupportive or badly handled response to a mental health issue in your current or previous workplace?",
+        "option": [
+            "Maybe/Not sure",
+            "No",
+            "Yes, I experienced",
+            "Yes, I observed"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have your observations of how another individual who discussed a mental health disorder made you less likely to reveal a mental health issue yourself in your current workplace?",
+        "option": [
+            "Maybe",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you have a family history of mental illness?",
+        "option": [
+            "I don't know",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have you had a mental health disorder in the past?",
+        "option": [
+            "Maybe",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you currently have a mental health disorder?",
+        "option": [
+            "Maybe",
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "If yes, what condition(s) have you been diagnosed with?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "If maybe, what condition(s) do you believe you have?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have you been diagnosed with a mental health condition by a medical professional?",
+        "option": [
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "If so, what condition(s) were you diagnosed with?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Have you ever sought treatment for a mental health issue from a mental health professional?",
+        "option": [
+            "No",
+            "Yes"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {
+                "Yes": 1,
+                "No": 0
+            }
+        }
+    },
+    {
+        "question": "If you have a mental health issue, do you feel that it interferes with your work when being treated effectively?",
+        "option": [
+            "Not applicable to me",
+            "Rarely",
+            "Sometimes",
+            "Never",
+            "Often"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "If you have a mental health issue, do you feel that it interferes with your work when NOT being treated effectively?",
+        "option": [
+            "Not applicable to me",
+            "Rarely",
+            "Sometimes",
+            "Never",
+            "Often"
+        ],
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "What is your age?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "What is your gender?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "What is your gender?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "What country do you work in?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Which of the following best describes your work position?",
+        "option": "",
+        "varaibles": {
+            "name": "",
+            "options": {}
+        }
+    },
+    {
+        "question": "Do you work remotely?",
+        "option": [
+            "Sometimes",
+            "Never",
+            "Always"
         ],
         "varaibles": {
             "name": "",
