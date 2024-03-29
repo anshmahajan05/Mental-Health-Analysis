@@ -31,7 +31,7 @@ function NavBar() {
           <Nav.Link
             className='navLink'
             as={Link}
-            to='/login'
+            to='/'
             style={{
               paddingLeft: "35px",
               paddingRight: "35px",
