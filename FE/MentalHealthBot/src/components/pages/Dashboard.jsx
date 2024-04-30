@@ -61,10 +61,10 @@ const Dashboard = () => {
       >
         {/* <div style={{ display:"flex", padding: "5px", flexDirection: "row", flexWrap:"wrap", margin:"auto", justifyContent:"center" }}>
           <div className="dashboard-chart">
-            <BarChart />
+            {/* <BarChart /> */}
           </div>
           <div className="dashboard-chart">
-            <LineChart />
+            {/* <LineChart /> */}
             </div>
         </div>
         <div style={{ border:"none", height:"300px", flexWrap:"wrap", width:"100%" }} className="dashboard-chart">
