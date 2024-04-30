@@ -1,4 +1,5 @@
-[{
+[
+    {
         "question": "How many employees does your company or organization have?",
         "option": [
             "1-5",
@@ -27,24 +28,10 @@
             "No"
         ],
         "variable": {
-            "name": "",
+            "name": "tech_company_or_role",
             "options": {
                 "Yes": 1,
-                "No": 0
-            }
-        }
-    },
-    {
-        "question": "Is your primary role within your company related to tech/IT?",
-        "option": [
-            "Yes",
-            "No"
-        ],
-        "variable": {
-            "name": "",
-            "options": {
-                "Yes": 1,
-                "No": 0
+                "No": 2
             }
         }
     },
@@ -57,8 +44,13 @@
             "I don't know "
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_benefits",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3,
+                "Not eligible for coverage / N/A": -1
+            }
         }
     },
     {
@@ -69,8 +61,12 @@
             "I am not sure"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_know_options",
+            "options": {
+                "Yes": 1,
+                "I am not sure": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -81,8 +77,12 @@
             "I don't know"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_discuss",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -93,8 +93,12 @@
             "I don't know"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_learn",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -105,8 +109,12 @@
             "I don't know"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_anon",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -120,8 +128,15 @@
             "I don't know"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_mh_leave",
+            "options": {
+                "Very easy": 1,
+                "Somewhat easy": 2,
+                "Neither easy nor difficult": 3,
+                "I don't know": 3,
+                "Somewhat difficult": 4,
+                "Very difficult": 5
+            }
         }
     },
     {
@@ -132,20 +147,28 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_mh_ncsq",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
-        "question": "Do you think that discussing a mental health disorder with your employer would have negative consequences?",
+        "question": "Do you think that discussing a physical health issue with your employer would have negative consequences?",
         "option": [
             "No",
             "Maybe",
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_ph_ncsq",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -156,8 +179,12 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_comf_cw",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -168,8 +195,12 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_comf_sup",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -180,8 +211,12 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_serious",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -191,8 +226,11 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "cep_others_ncsq",
+            "options": {
+                "Yes": 1,
+                "No": 2
+            }
         }
     },
     {
@@ -202,8 +240,11 @@
             "Yes"
         ],
         "variable": {
-            "name": "",
-            "options": {}
+            "name": "pep_have",
+            "options": {
+                "Yes": 1,
+                "No": 2
+            }
         }
     },
     {
@@ -215,8 +256,13 @@
             "Some did"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_benefits",
+            "options": {
+                "Yes, they all did": 1,
+                "Some did": 2,
+                "I don't know": 3,
+                "No, none did": 4
+            }
         }
     },
     {
@@ -228,8 +274,13 @@
             "No, I only became aware later"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_know_options",
+            "options": {
+                "Yes, I was aware of all of them": 1,
+                "I was aware of some": 2,
+                "No, I only became aware later": 3,
+                "N/A (not currently aware)": 4
+            }
         }
     },
     {
@@ -241,8 +292,13 @@
             "Yes, they all did"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_discuss",
+            "options": {
+                "Yes, they all did": 1,
+                "Some did": 2,
+                "I don't know": 3,
+                "None did": 4
+            }
         }
     },
     {
@@ -250,11 +306,17 @@
         "option": [
             "None did",
             "Some did",
-            "Yes, they all did"
+            "Yes, they all did",
+            "I don't know"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_learn",
+            "options": {
+                "Yes, they all did": 1,
+                "Some did": 2,
+                "I don't know": 3,
+                "None did": 4
+            }
         }
     },
     {
@@ -266,8 +328,13 @@
             "No"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_anon",
+            "options": {
+                "Yes, always": 1,
+                "Sometimes": 2,
+                "I don't know": 3,
+                "No": 4
+            }
         }
     },
     {
@@ -279,8 +346,13 @@
             "None of them"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_mh_ncsq",
+            "options": {
+                "Yes, all of them": 1,
+                "Some of them": 2,
+                "I don't know": 3,
+                "None of them": 4
+            }
         }
     },
     {
@@ -291,8 +363,12 @@
             "None of them"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_ph_ncsq",
+            "options": {
+                "Yes, all of them": 1,
+                "Some of them": 2,
+                "None of them": 3
+            }
         }
     },
     {
@@ -303,8 +379,12 @@
             "Yes, at all of my previous employers"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_comf_cw",
+            "options": {
+                "Yes, at all of my previous employers": 1,
+                "Some of my previous employers": 2,
+                "No, at none of my previous employers": 3
+            }
         }
     },
     {
@@ -316,8 +396,13 @@
             "Yes, at all of my previous employers"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_comf_sup",
+            "options": {
+                "Yes, at all of my previous employers": 1,
+                "Some of my previous employers": 2,
+                "I don't know": 3,
+                "No, at none of my previous employers": 4
+            }
         }
     },
     {
@@ -329,8 +414,13 @@
             "Yes, they all did"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_serious",
+            "options": {
+                "Yes, they all did": 1,
+                "Some did": 2,
+                "I don't know": 3,
+                "None did": 4
+            }
         }
     },
     {
@@ -341,8 +431,12 @@
             "Yes, all of them"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "pep_others_ncsq",
+            "options": {
+                "Yes, all of them": 1,
+                "Some of them": 2,
+                "None of them": 3
+            }
         }
     },
     {
@@ -353,8 +447,12 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "fep_ph_willing",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -365,8 +463,12 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "fep_mh_willing",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -379,8 +481,14 @@
             "Yes, it has"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "hurt_career",
+            "options": {
+                "Yes, it has": 1,
+                "Yes, I think it would": 2,
+                "Maybe": 3,
+                "No, I don't think it would": 4,
+                "No, it has not": 5
+            }
         }
     },
     {
@@ -393,8 +501,14 @@
             "Yes, they do"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "cw_view_neg",
+            "options": {
+                "Yes, they do": 1,
+                "Yes, I think they would": 2,
+                "Maybe": 3,
+                "No, I don't think they would": 4,
+                "No, they do not": 5
+            }
         }
     },
     {
@@ -408,8 +522,15 @@
             "Somewhat not open"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "comf_ff",
+            "options": {
+                "Very open": 1,
+                "Somewhat open": 2,
+                "Neutral": 3,
+                "Somewhat not open": 4,
+                "Not open at all": 5,
+                "Not applicable to me (I do not have a mental illness)": -1
+            }
         }
     },
     {
@@ -421,20 +542,13 @@
             "Yes, I observed"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
-        }
-    },
-    {
-        "question": "Have your observations of how another individual who discussed a mental health disorder made you less likely to reveal a mental health issue yourself in your current workplace?",
-        "option": [
-            "Maybe",
-            "No",
-            "Yes"
-        ],
-        "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "neg_response",
+            "options": {
+                "Yes, I experienced": 1,
+                "Yes, I observed": 2,
+                "Maybe/Not sure": 3,
+                "No": 4
+            }
         }
     },
     {
@@ -445,8 +559,12 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_fam_hist",
+            "options": {
+                "Yes": 1,
+                "I don't know": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -457,8 +575,12 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_hist",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
@@ -469,23 +591,27 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_cur",
+            "options": {
+                "Yes": 1,
+                "Maybe": 2,
+                "No": 3
+            }
         }
     },
     {
         "question": "If yes, what condition(s) have you been diagnosed with?",
         "option": "",
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_cur_name_yes",
+            "options": ""
         }
     },
     {
         "question": "If maybe, what condition(s) do you believe you have?",
         "option": "",
         "varaibles": {
-            "name": "",
+            "name": "mh_cur_name_maybe",
             "options": {}
         }
     },
@@ -496,16 +622,19 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_diag_pro",
+            "options": {
+                "Yes": 1,
+                "No": 2
+            }
         }
     },
     {
         "question": "If so, what condition(s) were you diagnosed with?",
         "option": "",
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "mh_diag_pro_name",
+            "options": ""
         }
     },
     {
@@ -515,10 +644,10 @@
             "Yes"
         ],
         "varaibles": {
-            "name": "",
+            "name": "sought_treat",
             "options": {
                 "Yes": 1,
-                "No": 0
+                "No": 2
             }
         }
     },
@@ -532,8 +661,14 @@
             "Often"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "work_affect_effect",
+            "options": {
+                "Often": 1,
+                "Sometimes": 2,
+                "Rarely": 3,
+                "Never": 4,
+                "Not applicable to me": -1
+            }
         }
     },
     {
@@ -546,48 +681,136 @@
             "Often"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "work_affect_ineffect",
+            "options": {
+                "Often": 1,
+                "Sometimes": 2,
+                "Rarely": 3,
+                "Never": 4,
+                "Not applicable to me": -1
+            }
         }
     },
     {
         "question": "What is your age?",
         "option": "",
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "age",
+            "options": ""
         }
     },
     {
         "question": "What is your gender?",
-        "option": "",
+        "option": [
+            "Male",
+            "Female",
+            "Others"
+        ],
         "varaibles": {
-            "name": "",
-            "options": {}
-        }
-    },
-    {
-        "question": "What is your gender?",
-        "option": "",
-        "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "gender",
+            "options": {
+                "Male": 1,
+                "Female": 2,
+                "Others": 3
+            }
         }
     },
     {
         "question": "What country do you work in?",
-        "option": "",
+        "option": [
+            "United Kingdom",
+            "United States of America",
+            "Canada",
+            "Germany",
+            "Netherlands",
+            "Australia",
+            "France",
+            "Belgium",
+            "Brazil",
+            "Denmark",
+            "Sweden",
+            "Russia",
+            "Spain",
+            "India",
+            "United Arab Emirates",
+            "Mexico",
+            "Switzerland",
+            "Norway",
+            "Argentina",
+            "Ireland",
+            "Italy",
+            "Colombia",
+            "Czech Republic",
+            "Vietnam",
+            "Finland",
+            "Bulgaria",
+            "South Africa",
+            "Slovakia",
+            "Bangladesh",
+            "Pakistan",
+            "New Zealand",
+            "Afghanistan",
+            "Poland",
+            "Other",
+            "Iran",
+            "Hungary",
+            "Israel",
+            "Japan",
+            "Ecuador",
+            "Bosnia and Herzegovina",
+            "Austria",
+            "Romania",
+            "Chile",
+            "Estonia"
+        ],
         "varaibles": {
-            "name": "",
-            "options": {}
-        }
-    },
-    {
-        "question": "Which of the following best describes your work position?",
-        "option": "",
-        "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "work_country",
+            "options": {
+                "United Kingdom": 0,
+                "United States of America": 1,
+                "Canada": 2,
+                "Germany": 3,
+                "Netherlands": 4,
+                "Australia": 5,
+                "France": 6,
+                "Belgium": 7,
+                "Brazil": 8,
+                "Denmark": 9,
+                "Sweden": 10,
+                "Russia": 11,
+                "Spain": 12,
+                "India": 13,
+                "United Arab Emirates": 14,
+                "Mexico": 15,
+                "Switzerland": 16,
+                "Norway": 17,
+                "Argentina": 18,
+                "Ireland": 19,
+                "Italy": 20,
+                "Colombia": 21,
+                "Czech Republic": 22,
+                "Vietnam": 23,
+                "Finland": 24,
+                "Bulgaria": 25,
+                "South Africa": 26,
+                "Slovakia": 27,
+                "Bangladesh": 28,
+                "Pakistan": 29,
+                "New Zealand": 30,
+                "Afghanistan": 31,
+                "Poland": 32,
+                "Other": 33,
+                "Iran": 34,
+                "Hungary": 35,
+                "Israel": 36,
+                "Japan": 37,
+                "Ecuador": 38,
+                "Bosnia and Herzegovina": 39,
+                "Austria": 40,
+                "Romania": 41,
+                "Chile": 42,
+                "Estonia": 43
+            }
         }
     },
     {
@@ -598,8 +821,12 @@
             "Always"
         ],
         "varaibles": {
-            "name": "",
-            "options": {}
+            "name": "work_remote",
+            "options": {
+                "Always": 1,
+                "Sometimes": 2,
+                "Never": 3
+            }
         }
     }
 ]
