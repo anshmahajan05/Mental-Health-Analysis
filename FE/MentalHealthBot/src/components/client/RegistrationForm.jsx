@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -23,7 +23,7 @@ function SignUpPage() {
     const checkToken = async() => {
       const  token = localStorage.getItem("token");
       if (token) {
-        navigate("/subscription")
+        navigate("/dashboard")
       }
     };
     checkToken();
@@ -53,14 +53,85 @@ function SignUpPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    // Check if any required fields are missing
+    const requiredFields = ["name", "contactno", "address", "email", "username", "password"];
+    const missingFields = requiredFields.filter(field => !formData[field].trim());
+    if (missingFields.length > 0) {
+      toast({
+        title: `Error`,
+        description: `Required fields (${missingFields.join(", ")}) are missing`,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+  
+    // Validate name field
+    const nameRegex = /^[A-Za-z]+$/;
+    if (!nameRegex.test(formData.name.trim())) {
+      toast({
+        title: `Error`,
+        description: "Name should contain only characters",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+  
+    // Validate mobile number field
+    const mobileRegex = /^[0-9]+$/;
+    if (formData.contactno.trim().length !== 10 || !mobileRegex.test(formData.contactno)) {
+      toast({
+        title: `Error`,
+        description: "Mobile number should be 10 digits and contain only numbers",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+  
+    // Validate email field
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email.trim())) {
+      toast({
+        title: `Error`,
+        description: "Invalid email format",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+  
+    // Validate username field
+    if (formData.username.includes(" ")) {
+      toast({
+        title: `Error`,
+        description: "Username should not contain spaces",
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+  
+    // If all validations pass, proceed with form submission
     try {
       const response = await axios.post(
         `${URL}mentalhealth/signup/`,
         JSON.stringify(formData),
         {
           headers: {
-            "Content-Type": "application/json", // Set the content type of the request
-            // 'Authorization': 'Bearer YOUR_ACCESS_TOKEN', // Replace with your access token or any other custom headers
+            "Content-Type": "application/json",
           },
         }
       );
@@ -95,8 +166,9 @@ function SignUpPage() {
       });
       console.log(e);
     }
-    // console.log("Form data submitted:", formData);
   };
+  
+  
 
   return (
     <div className='container'>

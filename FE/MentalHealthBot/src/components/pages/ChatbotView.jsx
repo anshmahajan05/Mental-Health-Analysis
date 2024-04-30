@@ -1,4 +1,3 @@
-import NavBar from "../client/NavBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Chatbox from "../chatbot/chatDisplay";
 import ChatsSection from "../chatbot/chatsSection";
@@ -6,18 +5,19 @@ import { useState, useEffect } from "react";
 import URL from "../../EndPoint";
 import axios from "axios";
 import { useToast } from "@chakra-ui/react";
+import useAuth from "../../../utils/useAuth";
 
 const ChatbotView = () => {
   const [list, setList] = useState([]);
   const [chat, setChat] = useState([]);
   const [currentChat, setCurrentChat] = useState(0);
   const [message, setMessage] = useState("");
-
+  const { token } = useAuth();
   const toast = useToast();
+  
   useEffect(() => {
     const getChatHistory = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem("token"));
         const response1 = await axios.get(`${URL}mentalhealth/chathistory/`, {
           headers: {
             "Content-Type": "application/json", // Set the content type of the request
@@ -68,7 +68,6 @@ const ChatbotView = () => {
         id: chat.length,
       }
       chat.push(newMessage);
-      const token = JSON.parse(localStorage.getItem("token"));
       const response = await axios.post(
         `${URL}mentalhealth/chatbot/`,
         { message: message,
@@ -99,7 +98,6 @@ const ChatbotView = () => {
   useEffect(() => {
     const updateChat = async () => {
       try {
-        const token = JSON.parse(localStorage.getItem("token"));
         const response2 = await axios.post(
           `${URL}mentalhealth/chathistory/`,
           { ChatId: list[currentChat].id },
@@ -128,7 +126,6 @@ const ChatbotView = () => {
 
   const newChat = async() => {
     try {
-      const token = JSON.parse(localStorage.getItem("token"));
       const response = await axios.post(
         `${URL}mentalhealth/newchat/`,
         { isTestGiven: "false",
@@ -157,7 +154,6 @@ const ChatbotView = () => {
   }
   return (
     <>
-      <NavBar />
       <div
         style={{
           display: "flex",
