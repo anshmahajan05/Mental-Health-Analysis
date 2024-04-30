@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import NavBar from "./components/client/NavBar";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/register";
@@ -7,10 +7,12 @@ import SubscriptionView from "./components/client/SubscriptionView";
 import Dashboard from "./components/pages/Dashboard";
 import ChatbotView from "./components/pages/ChatbotView";
 import RequireAuth from "./components/RequireAuth";
+import TakeTest from "./components/pages/TakeTest";
 
 export const AuthContext = createContext();
 
 const AllRoutes = () => {
+  const navigate = useNavigate();
   const [token, setToken] = useState(null);
   const authLogin = (token) => {
     setToken(token);
@@ -28,7 +30,10 @@ const AllRoutes = () => {
     const setTokenLocal = () => {
       const  token = localStorage.getItem("token");
       // eslint-disable-next-line no-extra-boolean-cast
-      if (!!token) setToken(token);
+      if (!!token) {
+        setToken(token)
+        navigate('/dashboard');
+      }
     }
     setTokenLocal();
   }, []);
@@ -45,6 +50,7 @@ const AllRoutes = () => {
         </Route>
         <Route element={<RequireAuth allowedRoles={["Customer"]}/>}>
           <Route path='/chatbot' element={<ChatbotView />}></Route>
+          <Route path='/test' element={<TakeTest />}></Route>
         </Route>
         <Route element={<RequireAuth allowedRoles={["Therapist"]}/>}>
           <Route path='/subscription' element={<SubscriptionView />}></Route>
