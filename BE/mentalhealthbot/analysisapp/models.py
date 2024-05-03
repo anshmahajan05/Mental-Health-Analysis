@@ -104,6 +104,9 @@ class TestDetails(models.Model):
     gender =  models.CharField(max_length=255,null=True)
     work_country = models.CharField(max_length=255,null=True)
     work_remote =  models.CharField(max_length=255,null=True) 
+    pred_openness = models.CharField(max_length=255,null=True)
+    pred_diag_pro = models.CharField(max_length=255,null=True)
+    pred_treatment = models.CharField(max_length=255,null=True)
 
 class ChatHistory(models.Model):
     id = models.AutoField(primary_key=True)
