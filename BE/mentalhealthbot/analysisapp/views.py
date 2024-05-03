@@ -392,6 +392,7 @@ class Chatbot(APIView):
             result = get_gemini_response(message, chat)
             reply = result.text
             reply = reply.replace("\n", "<br>")
+            reply = reply.replace("**", "")
         except:
             reply = "Sorry, I couldn't understand your message correctly. <br> Could you tell me more about whats happenning?"
 
