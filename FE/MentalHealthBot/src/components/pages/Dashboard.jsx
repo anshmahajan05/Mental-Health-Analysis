@@ -1,3 +1,4 @@
+/* eslint-disable no-extra-boolean-cast */
 import "bootstrap/dist/css/bootstrap.min.css";
 import useAuth from "../../../utils/useAuth";
 import { Button } from "react-bootstrap";
@@ -75,7 +76,9 @@ const Dashboard = () => {
                   fontWeight: "500",
                   fontSize: "20px",
                 }}
-              >Name: {token.first_name}</div>
+              >
+                Name: {token.first_name}
+              </div>
               <div
                 style={{
                   paddingLeft: "5px",
@@ -83,11 +86,13 @@ const Dashboard = () => {
                   fontWeight: "500",
                   fontSize: "20px",
                 }}
-              >Username: {token.username}</div>
+              >
+                Username: {token.username}
+              </div>
             </div>
           </div>
         </div>
-        <div>
+        <div style={{ display: "flex", justifyContent: "center", flexWrap:"wrap" }}>
           {userType === "Customer" && renderUserButtons()}
           {userType === "Therapist" && renderTherapistButtons()}
           <Link to="/">

@@ -198,6 +198,117 @@
   font-size: large;
 }
 
+/* Test Page  */
+.test-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: auto;
+  height: 80vh;
+  padding: 10px;
+}
+.test-page-splash{
+  font-weight: 500;
+  font-size: 25px;
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.question-section {
+  display: flex;
+  flex-direction: column;
+  width: 80%; /* Adjust according to your preference */
+  max-width: 800px; /* Maximum width */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.options-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.option-item {
+  margin-bottom: 10px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.option-radio {
+  margin-right: 10px;
+}
+
+.text-input {
+  width: 100%; /* Takes up full width */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  
+}
+
+.nav-button,
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-button:hover,
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+/* Take test buttons */
+/* Styles for the question section */
+.question-section {
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Styles for the question text */
+.question-text {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+/* Hover effect for option buttons */
+.option-button:hover {
+  background-color: #0056b3; /* Light gray background on hover */
+}
+
+/* Navigation button hover effect */
+.nav-button:hover,
+.submit-button:hover {
+  background-color: #0056b3; /* Dark blue background on hover */
+  color: white;
+}
 
 
 body {

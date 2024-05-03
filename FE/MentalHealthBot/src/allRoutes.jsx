@@ -50,7 +50,7 @@ const AllRoutes = () => {
         </Route>
         <Route element={<RequireAuth allowedRoles={["Customer"]}/>}>
           <Route path='/chatbot' element={<ChatbotView />}></Route>
-          <Route path='/test' element={<TakeTest />}></Route>
+          <Route path='/test' element={<TakeTest />}></Route> 
         </Route>
         <Route element={<RequireAuth allowedRoles={["Therapist"]}/>}>
           <Route path='/subscription' element={<SubscriptionView />}></Route>
