@@ -12,4 +12,5 @@ urlpatterns = [
     path("chatbot/", Chatbot.as_view(), name="Chatbot"),
     path("newchat/", NewChat.as_view(), name="NewChat"),
     path("chathistory/", chathistory.as_view(), name="chathistory"),
+    path("testapi/", TestApi.as_view(), name="testapi"),
 ]

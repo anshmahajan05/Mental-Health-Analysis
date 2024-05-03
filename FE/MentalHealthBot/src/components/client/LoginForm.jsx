@@ -1,14 +1,20 @@
-import React, { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-unescaped-entities */
+import { useState, useEffect } from "react";
 import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 import URL from "../../EndPoint";
+import useAuth from "../../../utils/useAuth";
 
 function LoginForm() {
   const toast = useToast();
   const navigate = useNavigate();
-  
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/dashboard";
+
+  const { authLogin, token } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -16,9 +22,8 @@ function LoginForm() {
   
   useEffect(() => {
     const checkToken = async() => {
-      const  token = localStorage.getItem("token");
       if (token) {
-        navigate("/subscription")
+        navigate(from, {replace: true});
       }
     };
     checkToken();
@@ -57,7 +62,8 @@ function LoginForm() {
           //   position: "top",
           // });
           localStorage.setItem("token", JSON.stringify(response.data));
-          navigate("/subscription");
+          authLogin(response.data);
+          navigate(from, {replace: true});
         } else {
           toast({
             title: `Login`,

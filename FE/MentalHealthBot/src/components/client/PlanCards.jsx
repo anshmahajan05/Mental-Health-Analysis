@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* eslint-disable react/no-unknown-property */
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./plancards.css";
 function PlanCards() {

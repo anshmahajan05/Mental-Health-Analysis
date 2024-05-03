@@ -476,3 +476,15 @@ class chathistory(APIView):
         context['messages'] = messages
 
         return JsonResponse(context, status=status.HTTP_200_OK)
+    
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class TestApi(APIView):
+    def post(self, request):
+        print(request.data)
+        context = {}
+        context['status'] = "Submitted"
+        context['pred_openness'] = 3
+        context['pred_diag_pro'] = 1
+        context['pred_treatment'] = 1
+        return JsonResponse(context, status=status.HTTP_200_OK)

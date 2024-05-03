@@ -88,6 +88,23 @@
   height: auto;
 }
 
+.profile-img-container img{
+  max-width: 75px;
+  height: auto;
+  padding: 5px;
+  margin-right: 10px;
+}
+.profile-img-container{
+  display: flex;
+  flex-direction: row;
+  width:max-content;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 20px;
+}
+
 .login-form {
   flex: 1;
   padding: 20px;
