@@ -392,6 +392,7 @@ class Chatbot(APIView):
             result = get_gemini_response(message, chat)
             reply = result.text
             reply = reply.replace("\n", "<br>")
+            reply = reply.replace("**", "")
         except:
             reply = "Sorry, I couldn't understand your message correctly. <br> Could you tell me more about whats happenning?"
 
@@ -474,4 +475,16 @@ class chathistory(APIView):
         messages = messages_df.to_dict(orient='records')
         context['messages'] = messages
 
+        return JsonResponse(context, status=status.HTTP_200_OK)
+    
+@authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+class TestApi(APIView):
+    def post(self, request):
+        print(request.data)
+        context = {}
+        context['status'] = "Submitted"
+        context['pred_openness'] = 3
+        context['pred_diag_pro'] = 1
+        context['pred_treatment'] = 1
         return JsonResponse(context, status=status.HTTP_200_OK)
