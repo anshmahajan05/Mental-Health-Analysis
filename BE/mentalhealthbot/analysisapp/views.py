@@ -481,4 +481,9 @@ class chathistory(APIView):
 class TestApi(APIView):
     def post(self, request):
         print(request.data)
-        return JsonResponse({'status': 'submitted'}, status=status.HTTP_200_OK)
+        context = {}
+        context['status'] = "Submitted"
+        context['pred_openness'] = 3
+        context['pred_diag_pro'] = 1
+        context['pred_treatment'] = 1
+        return JsonResponse(context, status=status.HTTP_200_OK)
