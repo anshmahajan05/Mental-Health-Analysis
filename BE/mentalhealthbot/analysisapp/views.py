@@ -575,8 +575,12 @@ class TestApi(APIView):
 
     def get(self, request):
         test = pd.DataFrame(
-            TestDetails.objects.filter(UserId=request.user)
+            TestDetails.objects.filter(
+                UserId=request.user
+            ).values()
         )
+
+        print(test.columns)
 
         test.drop(columns=['UserId_id'], inplace=True)
 
