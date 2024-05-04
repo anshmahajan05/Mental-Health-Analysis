@@ -572,3 +572,15 @@ class TestApi(APIView):
         context['pred_treatment'] = int(treatment_pred[0])
 
         return JsonResponse(context, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        test = pd.DataFrame(
+            TestDetails.objects.filter(UserId=request.user)
+        )
+
+        test.drop(columns=['UserId_id'], inplace=True)
+
+        context = {}
+        context['results'] = test.to_dict(orient='records')
+
+        return JsonResponse(context, status=status.HTTP_200_OK)
