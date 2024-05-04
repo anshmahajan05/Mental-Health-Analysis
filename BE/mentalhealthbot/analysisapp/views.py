@@ -485,6 +485,8 @@ class TestApi(APIView):
         context = {}
 
         data = request.data
+
+        data['age'] = int(data.get('age'))
         test = TestDetails()
         test.test_date = datetime.now().date()
         test.UserId = request.user
