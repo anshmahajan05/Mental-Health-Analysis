@@ -387,15 +387,17 @@ class Chatbot(APIView):
         messageRecieved.Sender = "User"
         messageRecieved.Status = "success"
         messageRecieved.save()
-
-        try:
-            message += '\n\nLets suppose You are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
-            result = get_gemini_response(message, chat)
-            reply = result.text
-            reply = reply.replace("\n", "<br>")
-            reply = reply.replace("**", "")
-        except:
-            reply = "Sorry, I couldn't understand your message correctly. <br> Could you tell me more about whats happenning?"
+        if 'thanks' not in message.lower() and 'bye' not in message.lower() and 'thank' not in message.lower():
+            try:
+                message += '\n\nYour name is Swara and you are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
+                result = get_gemini_response(message, chat)
+                reply = result.text
+                reply = reply.replace("\n", "<br>")
+                reply = reply.replace("**", "")
+            except:
+                reply = "Sorry, I couldn't understand your message correctly. <br> Could you tell me more about whats happenning?"
+        else:
+            reply = "I am happy to assist you. Is there anything else I can assist you with?"
 
         messageSend = ChatMessages()
         messageSend.ChatId = chat_obj
