@@ -579,8 +579,9 @@ class TestApi(APIView):
                 UserId=request.user
             ).values()
         )
-
-        test.drop(columns=['UserId_id'], inplace=True)
+        
+        if len(test)>0:
+            test.drop(columns=['UserId_id'], inplace=True)
 
         context = {}
         context['results'] = test.to_dict(orient='records')
