@@ -10,7 +10,7 @@ const ResultCard = ({ result }) => {
       } else if (pred_diag_pro == 2 && pred_treatment == 1) {
         return "Consulting a doctor is recommended for your health.";
       } else if (pred_diag_pro == 2 && pred_treatment == 2) {
-        return "Your health appears stable, but consulting a doctor may still be beneficial for reassurance.";
+        return "Your mental health appears stable.";
       }
       return "";
     };    
