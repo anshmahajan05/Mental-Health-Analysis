@@ -28,18 +28,20 @@ const ChatbotView = () => {
         const chats = response1.data.chats;
         setList(chats);
         // line chats[0] must be changed to chats[chats.length -1]
-        const response2 = await axios.post(
-          `${URL}mentalhealth/chathistory/`,
-          { ChatId: chats[chats.length - 1].id },
-          {
-            headers: {
-              "Content-Type": "application/json", // Set the content type of the request
-              Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
-            },
-          }
-        );
-        setChat(response2.data?.messages);
-        setCurrentChat(chats.length - 1);
+        if (chats.length > 0) {
+          const response2 = await axios.post(
+            `${URL}mentalhealth/chathistory/`,
+            { ChatId: chats[chats.length - 1].id },
+            {
+              headers: {
+                "Content-Type": "application/json", // Set the content type of the request
+                Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
+              },
+            }
+          );
+          setChat(response2.data?.messages);
+          setCurrentChat(chats.length - 1);
+        }
       } catch (e) {
         toast({
           title: `Error in fetching logs.`,
