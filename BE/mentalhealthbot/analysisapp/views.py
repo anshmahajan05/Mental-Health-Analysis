@@ -389,7 +389,7 @@ class Chatbot(APIView):
         messageRecieved.save()
         if 'thanks' not in message.lower() and 'bye' not in message.lower() and 'thank' not in message.lower():
             try:
-                message += '\n\nYou are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
+                message += '\n\nYour name is Swara and you are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
                 result = get_gemini_response(message, chat)
                 reply = result.text
                 reply = reply.replace("\n", "<br>")
