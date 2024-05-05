@@ -94,6 +94,7 @@
   padding: 5px;
   margin-right: 10px;
 }
+
 .profile-img-container{
   display: flex;
   flex-direction: row;
@@ -215,6 +216,24 @@
   flex-wrap: wrap;
   text-align: center;
 }
+.test-page-splash-note{
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.test-cards{
+  display: flex;
+  flex-direction: row;
+  width:max-content;
+  justify-content: space-between;
+  align-items: center;
+  border: 0.5px solid black;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px;
+}
 
 .question-section {
   display: flex;
@@ -308,6 +327,109 @@
 .submit-button:hover {
   background-color: #0056b3; /* Dark blue background on hover */
   color: white;
+}
+
+
+/* Result Card */
+/* Styles for the ResultCard component */
+/* Styles for the ResultCard component */
+.result-card {
+  border: 1px solid #ccc; /* Border for the card */
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside the card */
+  margin-bottom: 10px; /* Space between cards */
+  background-color: #f9f9f9; /* Light gray background color */
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  width: 100%; /* Full width */
+  max-width: 350px; /* Maximum width */
+  transition: transform 0.2s ease-in-out; /* Transition for smooth scaling effect */
+  margin: 7px;
+}
+
+/* Styles for the test date */
+.test-date {
+  font-size: 14px; /* Font size */
+  color: #555; /* Dark gray text color */
+  margin-bottom: 10px; /* Space below the text */
+}
+
+/* Styles for the openness text */
+.openness {
+  font-size: 16px; /* Font size */
+  color: #333; /* Dark text color */
+  font-weight: bold; /* Bold font weight */
+  margin-bottom: 10px; /* Space below the text */
+}
+
+/* Styles for the diagnosis message */
+.diagnosis-message {
+  font-size: 14px; /* Font size */
+  color: #444; /* Text color */
+}
+
+/* On hover effect for the ResultCard component */
+.result-card:hover {
+  transform: scale(1.2); /* Scale card to 105% of original size */
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+}
+
+.banner {
+  background-color: #4caf50; /* Green background color */
+  color: white; /* White text color */
+  padding: 5px 10px; /* Padding around the banner */
+  border-radius: 5px; /* Rounded corners */
+  margin-bottom: 10px; /* Margin below the banner */
+  font-weight: 500; /* Bold text */
+}
+
+
+/* Test Modal */
+/* Styles for the modal overlay */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Dark background with transparency */
+}
+
+/* Styles for the modal content */
+.modal-content {
+  border-radius: 10px; /* Rounded corners */
+  padding: 20px; /* Padding inside the modal content */
+  background-color: #f9f9f9; /* Light background color */
+  max-width: 600px; /* Maximum width of the modal */
+}
+
+/* Styles for the modal header */
+.modal-header {
+  font-size: 1.5rem; /* Larger font size for the header */
+  font-weight: bold; /* Bold font weight */
+  color: #333; /* Dark text color */
+  margin-bottom: 10px; /* Margin below the header */
+}
+
+/* Styles for the modal body */
+.modal-body {
+  font-size: 1rem; /* Standard font size for the body */
+  color: #444; /* Dark text color */
+}
+
+/* Styles for the modal footer */
+.modal-footer {
+  display: flex; /* Use flexbox for alignment */
+  justify-content: flex-end; /* Align footer content to the right */
+  padding-top: 10px; /* Space above the footer */
+}
+
+/* Styles for buttons in the modal footer */
+.modal-footer Button {
+  margin-left: 10px; /* Space between buttons */
+}
+
+/* Styles for the modal close button */
+.modal-close-button {
+  background: transparent; /* Transparent background */
+  border: none; /* No border */
+  color: #333; /* Dark color */
+  font-size: 1.2rem; /* Larger font size for the close button */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
 

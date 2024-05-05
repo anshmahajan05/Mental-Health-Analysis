@@ -37,8 +37,6 @@ const ChatbotView = () => {
             },
           }
         );
-        console.log(response1);
-        console.log(response2);
         setChat(response2.data?.messages);
         setCurrentChat(chats.length-1);
       } catch (e) {

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,16 +18,6 @@ function SignUpPage() {
 
   const toast = useToast();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const checkToken = async() => {
-      const  token = localStorage.getItem("token");
-      if (token) {
-        navigate("/dashboard")
-      }
-    };
-    checkToken();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
