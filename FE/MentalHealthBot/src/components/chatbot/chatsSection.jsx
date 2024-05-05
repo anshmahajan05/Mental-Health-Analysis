@@ -37,6 +37,7 @@ const ChatsSection = ({ chatList, currentChat, setCurrentChat, newChat, updateCh
       >
         {chatList.map((chat, index) => {
           const dt = new Date(chat.DateAndTime);
+          console.log(dt);
           return (
             <div
               key={index}
@@ -74,7 +75,7 @@ const ChatsSection = ({ chatList, currentChat, setCurrentChat, newChat, updateCh
                   borderRadius: "50%",
                 }}
               /> */}
-                <span>{dt.toDateString()}</span>
+                <span>{dt}</span>
               </button>
             </div>
           );
