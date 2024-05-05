@@ -84,7 +84,7 @@ const Dashboard = () => {
           flexWrap: "wrap",
           justifyContent: "space-between",
           alignItems: "center",
-          width: "95%",
+          width: "100%",
         }}
       >
         <div
@@ -144,9 +144,9 @@ const Dashboard = () => {
           flexDirection: "row",
           padding: "30px",
           flexWrap: "wrap",
-          justifyContent: "space-between",
+          justifyContent: "center",
           alignItems: "center",
-          width: "95%",
+          width: "100%",
         }}
       >
         <div
