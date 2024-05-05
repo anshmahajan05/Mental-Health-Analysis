@@ -391,6 +391,8 @@ class Chatbot(APIView):
             try:
                 if 'hi' in message.lower() or 'hello' in message.lower() or 'i am' in message.lower() or "i'm" in message.lower():
                     greet = "Your name is Swara and "
+                else:
+                    greet = " "
                 message += f'\n\n{greet}you are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
                 result = get_gemini_response(message, chat)
                 reply = result.text
