@@ -52,7 +52,7 @@ const ResultCard = ({ result }) => {
         </div>
   
         {/* Display diagnosis message */}
-        <div className="diagnosis-message">Treatment Prediction: {diagnosisMessage}</div>
+        <div className="diagnosis-message">Treatment Recommendation: {diagnosisMessage}</div>
       </div>
     );
   };
