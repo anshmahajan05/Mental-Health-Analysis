@@ -84,6 +84,13 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
           }}
           value={messageContent}
           onChange={(e)=>setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && messageContent.trim() !== "") {
+              // If Enter key is pressed and messageContent is not empty, call messageSubmit
+              e.preventDefault(); // Prevent the default behavior of Enter key
+              messageSubmit();
+            }
+          }}
         />
         <button
           style={{
