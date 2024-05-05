@@ -4,11 +4,12 @@ import { useState } from "react";
 const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [activeNext, setActiveNext] = useState(false);
+  const [option, setOption] = useState("");
 
   const handleNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      if (Array.isArray(questions[currentQuestionIndex + 1].option))
-        setActiveNext(false);
+      setActiveNext(false);
+      setOption("");
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
     // console.log(answers);
@@ -27,8 +28,10 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
     const newAnswers = { ...answers };
     newAnswers[currentQuestion.variable.name] =
       currentQuestion.variable.options[value];
-    // console.log(Object.keys(newAnswers).length);
-    setAnswers(newAnswers);
+      setAnswers(newAnswers);
+      
+      console.log(Object.keys(newAnswers).length);
+    console.log(answers);
   };
 
   const handleSubmit = () => {
@@ -47,8 +50,9 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
             currentQuestion.option.map((opt, index) => (
               <button
                 key={index}
-                className={`option-button btn btn-outline-primary m-1`}
+                className={`option-button btn btn-outline-primary m-1 ${option == opt? "btn-primary text-white":"btn-outline-primary"}`}
                 onClick={(e) => {
+                  setOption(opt);
                   e.preventDefault();
                   handleOptionChange({ target: { value: opt } });
                 }}
@@ -66,6 +70,10 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
                   value={answers[currentQuestion.variable.name] || ""}
                   onChange={(e) => {
                     const { value } = e.target; // Get the value of the input
+                    if(typeof(value) == "undefined" || value == null || value > 100 || value <= 0)
+                      setActiveNext(false);
+                    else
+                      setActiveNext(true);
                     setAnswers((prevAnswers) => ({
                       ...prevAnswers,
                       [currentQuestion.variable.name]: value, // Update the specific key-value pair
@@ -80,6 +88,10 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
                   value={answers[currentQuestion.variable.name] || ""}
                   onChange={(e) => {
                     const { value } = e.target; // Get the value of the input
+                    if(value.trim() == "")
+                      setActiveNext(false);
+                    else
+                      setActiveNext(true);
                     setAnswers((prevAnswers) => ({
                       ...prevAnswers,
                       [currentQuestion.variable.name]: value, // Update the specific key-value pair

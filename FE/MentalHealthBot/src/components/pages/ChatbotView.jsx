@@ -12,6 +12,7 @@ const ChatbotView = () => {
   const [chat, setChat] = useState([]);
   const [currentChat, setCurrentChat] = useState(0);
   const [message, setMessage] = useState("");
+  const [submitMsg, setSubmitMsg] = useState(false);
   const { token } = useAuth();
   const toast = useToast();
 
@@ -56,6 +57,7 @@ const ChatbotView = () => {
   }, []);
 
   const messageSubmit = async () => {
+    setSubmitMsg(true);
     try {
       const newMessage = {
         ChatID_id: 1,
@@ -88,6 +90,8 @@ const ChatbotView = () => {
         position: "top",
       });
       console.log(e);
+    } finally {
+      setSubmitMsg(false);
     }
   };
   const updateChat = async (id) => {
@@ -168,6 +172,7 @@ const ChatbotView = () => {
           messageContent={message}
           setMessage={setMessage}
           messageSubmit={messageSubmit}
+          submitMsg={submitMsg}
         />
       </div>
     </>

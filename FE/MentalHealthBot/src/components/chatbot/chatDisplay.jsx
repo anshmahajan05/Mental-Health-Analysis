@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
-const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
+const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit, submitMsg }) => {
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
           value={messageContent}
           onChange={(e)=>setMessage(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter" && messageContent.trim() !== "") {
+            if (e.key === "Enter" && messageContent.trim() !== "" && !submitMsg) {
               // If Enter key is pressed and messageContent is not empty, call messageSubmit
               e.preventDefault(); // Prevent the default behavior of Enter key
               messageSubmit();
@@ -99,7 +99,7 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
             borderRadius: "0 10px 10px 0", // Rounded corners on the right side
             border: "none",
             outline: "none",
-            backgroundColor: "#4CAF50",
+            backgroundColor: `${!submitMsg? "#4CAF50": "gray"}`,
             color: "white",
             cursor: "pointer",
             borderTop: "1px solid #aaa",
@@ -107,6 +107,7 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
             boxSizing: "border-box"
           }}
           onClick={() => messageSubmit()}
+          disabled={submitMsg}
         >
           Send
         </button>
