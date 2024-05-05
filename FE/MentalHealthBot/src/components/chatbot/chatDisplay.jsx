@@ -57,8 +57,8 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit}) => {
             key={index}
             style={{
               maxWidth: "70%", // Limit message width to 70% of container
-              alignSelf: message.Sender === "User" ? "flex-end" : "flex-start", // Align user messages to the right and bot messages to the left
-              backgroundColor: message.Sender === "User" ? "#E6E6E6" : "#DCF8C6", // Different background colors for user and bot messages
+              alignSelf: message.Sender == "User" ? "flex-end" : "flex-start", // Align user messages to the right and bot messages to the left
+              backgroundColor: message.Sender == "User" ? "#E6E6E6" : "#DCF8C6", // Different background colors for user and bot messages
               padding: "10px",
               marginBottom: "10px",
               borderRadius: "10px",

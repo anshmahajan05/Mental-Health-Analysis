@@ -41,7 +41,7 @@ const TakeTest = () => {
           },
         }
       );
-      if (response.status === 200) {
+      if (response.status == 200) {
         setTestResults(response.data); // Store the test results
         setIsModalOpen(true); // Open the modal
         toast({
@@ -111,7 +111,23 @@ const TakeTest = () => {
             {/* Pass test results to ResultCard */}
             {testResults && <ResultCard result={testResults} />}
           </ModalBody>
-          <ModalFooter className=".modal-footer">
+          <ModalFooter style={{
+            display:"flex",
+            flexDirection:"row",
+            justifyContent:"space-between",
+            alignItems:"center",
+            paddingTop:"10px"
+          }}>
+            <Button
+              colorScheme="blue"
+              onClick={() => {
+                setIsModalOpen(false);
+                navigate("/chatbot");
+              }}
+              className=".modal-close-button"
+            >
+              Continue with Chatbot
+            </Button>
             <Button
               colorScheme="blue"
               onClick={() => {

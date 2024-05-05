@@ -49,7 +49,7 @@ const ChatsSection = ({ chatList, currentChat, setCurrentChat, newChat, updateCh
                 borderRadius: "10px",
                 transition: ".3s all ease-in-out",
                 width: "100%",
-                backgroundColor: index === currentChat ? "white" : "",
+                backgroundColor: index == currentChat ? "white" : "",
               }}
             >
               <button
