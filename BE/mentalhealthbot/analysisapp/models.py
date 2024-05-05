@@ -96,6 +96,7 @@ class TestDetails(models.Model):
     mh_cur = models.CharField(max_length=255,null=True)
     mh_cur_name_yes = models.CharField(max_length=255,null=True)
     mh_cur_name_maybe = models.CharField(max_length=255,null=True)
+    mh_diag_pro = models.CharField(max_length=255,null=True)
     mh_diag_pro_name = models.CharField(max_length=255,null=True)
     sought_treat = models.CharField(max_length=255,null=True)
     work_affect_effect = models.CharField(max_length=255,null=True) 

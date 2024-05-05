@@ -34,6 +34,7 @@ from pathlib import Path
 import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 import dotenv
+import joblib
 
 dotenv.load_dotenv(os.path.join(BASE_DIR, ".env"))
 
@@ -481,10 +482,107 @@ class chathistory(APIView):
 @permission_classes([IsAuthenticated])
 class TestApi(APIView):
     def post(self, request):
-        print(request.data)
         context = {}
-        context['status'] = "Submitted"
-        context['pred_openness'] = 3
-        context['pred_diag_pro'] = 1
-        context['pred_treatment'] = 1
+
+        data = request.data
+
+        data['age'] = int(data.get('age'))
+        test = TestDetails()
+        test.test_date = datetime.now().date()
+        test.UserId = request.user
+        test.num_employees = data.get('num_employees')
+        test.tech_company_or_role = data.get('tech_company_or_role')
+        test.cep_benefits = data.get('cep_benefits')
+        test.cep_know_options = data.get('cep_know_options')
+        test.cep_discuss = data.get('cep_discuss')
+        test.cep_learn = data.get('cep_learn')
+        test.cep_anon = data.get('cep_anon')
+        test.cep_mh_leave = data.get('cep_mh_leave')
+        test.cep_mh_ncsq = data.get('cep_mh_ncsq')
+        test.cep_ph_ncsq = data.get('cep_ph_ncsq')
+        test.cep_comf_cw = data.get('cep_comf_cw')
+        test.cep_comf_sup = data.get('cep_comf_sup')
+        test.cep_serious = data.get('cep_serious')
+        test.cep_others_ncsq = data.get('cep_others_ncsq')
+        test.pep_have = data.get('pep_have')
+        test.pep_benefits = data.get('pep_benefits')
+        test.pep_know_options = data.get('pep_know_options')
+        test.pep_discuss = data.get('pep_discuss')
+        test.pep_learn = data.get('pep_learn')
+        test.pep_anon = data.get('pep_anon')
+        test.pep_mh_ncsq = data.get('pep_mh_ncsq')
+        test.pep_ph_ncsq = data.get('pep_ph_ncsq')
+        test.pep_comf_cw = data.get('pep_comf_cw')
+        test.pep_comf_sup = data.get('pep_comf_sup')
+        test.pep_serious = data.get('pep_serious')
+        test.pep_others_ncsq = data.get('pep_others_ncsq')
+        test.fep_ph_willing = data.get('fep_ph_willing')
+        test.fep_mh_willing = data.get('fep_mh_willing')
+        test.hurt_career = data.get('hurt_career')
+        test.cw_view_neg = data.get('cw_view_neg')
+        test.comf_ff = data.get('comf_ff')
+        test.neg_response = data.get('neg_response')
+        test.mh_fam_hist = data.get('mh_fam_hist')
+        test.mh_hist = data.get('mh_hist')
+        test.mh_cur = data.get('mh_cur')
+        test.mh_cur_name_yes = data.get('mh_cur_name_yes')
+        test.mh_cur_name_maybe = data.get('mh_cur_name_maybe')
+        test.mh_diag_pro = data.get('mh_diag_pro')
+        test.mh_diag_pro_name = data.get('mh_diag_pro_name')
+        test.sought_treat = data.get('sought_treat')
+        test.work_affect_effect = data.get('work_affect_effect') 
+        test.work_affect_ineffect =  data.get('work_affect_ineffect')
+        test.age =  data.get('age')
+        test.gender =  data.get('gender')
+        test.work_country = data.get('work_country')
+        test.work_remote =  data.get('work_remote')
+
+        df = pd.DataFrame([data])
+
+        openness_path = os.path.join(BASE_DIR, "models", "openness_rf.pkl")
+        diag_pro_path = os.path.join(BASE_DIR, "models", "diag_pro_rf.pkl")
+        treatment_path = os.path.join(BASE_DIR, "models", "treatment_rf.pkl")
+
+        clf = joblib.load(openness_path) 
+        clf2 = joblib.load(diag_pro_path)
+        clf3 = joblib.load(treatment_path)
+
+        diagnos_pro = df['mh_diag_pro'].iloc[0]
+        df.drop(columns=['fep_ph_willing', 'fep_mh_willing', 'mh_cur_name_yes', 'mh_cur_name_maybe', 'mh_diag_pro', 'mh_diag_pro_name', 'sought_treat'], inplace=True)
+
+        data = df.values.tolist()
+
+        openness_pred = clf.predict(data)
+
+        df1 = df.copy()
+        df1.drop(columns=['pep_learn', 'tech_company_or_role', 'cep_others_ncsq', 'pep_have'], inplace=True)
+        data1 = df1.values.tolist()
+        diag_pred = clf2.predict(data1)
+
+        treatment_pred = clf3.predict(data)
+
+        test.pred_openness = openness_pred[0]
+        test.pred_diag_pro = diag_pred[0]
+        test.pred_treatment = treatment_pred[0]
+        test.save()
+
+        context['submission_status'] = "Submitted"
+        context['pred_openness'] = int(openness_pred[0])
+        context['pred_diag_pro'] = int(diag_pred[0])
+        context['pred_treatment'] = int(treatment_pred[0])
+
+        return JsonResponse(context, status=status.HTTP_200_OK)
+
+    def get(self, request):
+        test = pd.DataFrame(
+            TestDetails.objects.filter(
+                UserId=request.user
+            ).values()
+        )
+
+        test.drop(columns=['UserId_id'], inplace=True)
+
+        context = {}
+        context['results'] = test.to_dict(orient='records')
+
         return JsonResponse(context, status=status.HTTP_200_OK)
