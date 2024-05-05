@@ -389,7 +389,7 @@ class Chatbot(APIView):
         messageRecieved.save()
 
         try:
-            message += '\n\n Answer this like you are a mental health chatbot.'
+            message += '\n\nLets suppose You are from India and always reply in English Language. Answer this like you are a mental health chatbot integrated to a Mental Health Assessment Website where Coorporate IT employees give test and get recommended to whether they are mentally fit or not.'
             result = get_gemini_response(message, chat)
             reply = result.text
             reply = reply.replace("\n", "<br>")
