@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit, submitMsg }) => {
   const messagesEndRef = useRef(null);
@@ -8,7 +8,7 @@ const Chatbox = ({ userChat , messageContent, setMessage , messageSubmit, submit
   useEffect(() => {
     // Scroll to the bottom of the messages div when userChat updates
     messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
-  }, [userChat]);
+  }, [userChat, submitMsg]);
   
   return (
     <div
