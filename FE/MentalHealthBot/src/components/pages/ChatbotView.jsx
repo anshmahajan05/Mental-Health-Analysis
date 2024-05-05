@@ -12,6 +12,7 @@ const ChatbotView = () => {
   const [chat, setChat] = useState([]);
   const [currentChat, setCurrentChat] = useState(0);
   const [message, setMessage] = useState("");
+  const [submitMsg, setSubmitMsg] = useState(false);
   const { token } = useAuth();
   const toast = useToast();
 
@@ -27,18 +28,20 @@ const ChatbotView = () => {
         const chats = response1.data.chats;
         setList(chats);
         // line chats[0] must be changed to chats[chats.length -1]
-        const response2 = await axios.post(
-          `${URL}mentalhealth/chathistory/`,
-          { ChatId: chats[chats.length - 1].id },
-          {
-            headers: {
-              "Content-Type": "application/json", // Set the content type of the request
-              Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
-            },
-          }
-        );
-        setChat(response2.data?.messages);
-        setCurrentChat(chats.length - 1);
+        if (chats.length > 0) {
+          const response2 = await axios.post(
+            `${URL}mentalhealth/chathistory/`,
+            { ChatId: chats[chats.length - 1].id },
+            {
+              headers: {
+                "Content-Type": "application/json", // Set the content type of the request
+                Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
+              },
+            }
+          );
+          setChat(response2.data?.messages);
+          setCurrentChat(chats.length - 1);
+        }
       } catch (e) {
         toast({
           title: `Error in fetching logs.`,
@@ -56,6 +59,7 @@ const ChatbotView = () => {
   }, []);
 
   const messageSubmit = async () => {
+    setSubmitMsg(true);
     try {
       const newMessage = {
         ChatID_id: 1,
@@ -66,9 +70,10 @@ const ChatbotView = () => {
         id: chat.length,
       };
       chat.push(newMessage);
+      setMessage("");
       const response = await axios.post(
         `${URL}mentalhealth/chatbot/`,
-        { message: message, ChatId: list[currentChat].id },
+        { message: newMessage.MessageContent, ChatId: list[currentChat].id },
         {
           headers: {
             "Content-Type": "application/json", // Set the content type of the request
@@ -77,7 +82,6 @@ const ChatbotView = () => {
         }
       );
       chat.push(response.data.reply);
-      setMessage("");
     } catch (e) {
       toast({
         title: `Error sending message.`,
@@ -88,6 +92,8 @@ const ChatbotView = () => {
         position: "top",
       });
       console.log(e);
+    } finally {
+      setSubmitMsg(false);
     }
   };
   const updateChat = async (id) => {
@@ -168,6 +174,7 @@ const ChatbotView = () => {
           messageContent={message}
           setMessage={setMessage}
           messageSubmit={messageSubmit}
+          submitMsg={submitMsg}
         />
       </div>
     </>

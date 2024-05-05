@@ -4,13 +4,29 @@ import { useState } from "react";
 const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [activeNext, setActiveNext] = useState(false);
+  const [option, setOption] = useState("");
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      if (Array.isArray(questions[currentQuestionIndex + 1].option))
-        setActiveNext(false);
+    if (currentQuestionIndex == 14 && option == "No") {
+      setCurrentQuestionIndex(currentQuestionIndex + 12);
+      const newAnswers = { ...answers };
+      newAnswers["pep_benefits"]=-1;
+      newAnswers["pep_know_options"]=-1;
+      newAnswers["pep_discuss"]=-1;
+      newAnswers["pep_learn"]=-1;
+      newAnswers["pep_anon"]=-1;
+      newAnswers["pep_mh_ncsq"]=-1;
+      newAnswers["pep_ph_ncsq"]=-1;
+      newAnswers["pep_comf_cw"]=-1;
+      newAnswers["pep_comf_sup"]=-1;
+      newAnswers["pep_serious"]=-1;
+      newAnswers["pep_others_ncsq"]=-1;
+      setAnswers(newAnswers);
+    } else if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+    setActiveNext(false);
+    setOption("");
     // console.log(answers);
   };
 
@@ -27,7 +43,6 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
     const newAnswers = { ...answers };
     newAnswers[currentQuestion.variable.name] =
       currentQuestion.variable.options[value];
-    // console.log(Object.keys(newAnswers).length);
     setAnswers(newAnswers);
   };
 
@@ -47,8 +62,13 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
             currentQuestion.option.map((opt, index) => (
               <button
                 key={index}
-                className={`option-button btn btn-outline-primary m-1`}
+                className={`option-button btn btn-outline-primary m-1 ${
+                  option == opt
+                    ? "btn-primary text-white"
+                    : "btn-outline-primary"
+                }`}
                 onClick={(e) => {
+                  setOption(opt);
                   e.preventDefault();
                   handleOptionChange({ target: { value: opt } });
                 }}
@@ -66,6 +86,14 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
                   value={answers[currentQuestion.variable.name] || ""}
                   onChange={(e) => {
                     const { value } = e.target; // Get the value of the input
+                    if (
+                      typeof value == "undefined" ||
+                      value == null ||
+                      value > 100 ||
+                      value <= 0
+                    )
+                      setActiveNext(false);
+                    else setActiveNext(true);
                     setAnswers((prevAnswers) => ({
                       ...prevAnswers,
                       [currentQuestion.variable.name]: value, // Update the specific key-value pair
@@ -80,6 +108,8 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
                   value={answers[currentQuestion.variable.name] || ""}
                   onChange={(e) => {
                     const { value } = e.target; // Get the value of the input
+                    if (value.trim() == "") setActiveNext(false);
+                    else setActiveNext(true);
                     setAnswers((prevAnswers) => ({
                       ...prevAnswers,
                       [currentQuestion.variable.name]: value, // Update the specific key-value pair
