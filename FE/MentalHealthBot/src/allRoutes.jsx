@@ -20,18 +20,13 @@ const AllRoutes = () => {
   const authLogout = () => {
     setToken(null);
   };
-  const authValues = {
-    token,
-    authLogin,
-    authLogout,
-  };
 
   useEffect(() => {
     const setTokenLocal = () => {
-      const  token = localStorage.getItem("token");
+      const  tempToken = localStorage.getItem("token");
       // eslint-disable-next-line no-extra-boolean-cast
-      if (!!token) {
-        setToken(token)
+      if (!!tempToken) {
+        setToken(tempToken)
         navigate('/dashboard');
       }
     }
@@ -40,7 +35,7 @@ const AllRoutes = () => {
   
   return (
     <>
-    <AuthContext.Provider value={authValues}>
+    <AuthContext.Provider value={{token, authLogin, authLogout}}>
       <NavBar />
       <Routes>
         <Route path='/' element={<Login />}></Route>

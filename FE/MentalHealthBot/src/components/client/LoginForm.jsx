@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "../../global.css"; // Import your CSS file for styling
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
@@ -14,20 +14,12 @@ function LoginForm() {
   const location = useLocation();
   let from = location.state?.from?.pathname || "/dashboard";
 
-  const { authLogin, token } = useAuth();
+  const { authLogin } = useAuth();
   const [formData, setFormData] = useState({
     username: "",
     password: "",
   });
   
-  useEffect(() => {
-    const checkToken = async() => {
-      if (token) {
-        navigate(from, {replace: true});
-      }
-    };
-    checkToken();
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -41,7 +41,7 @@ const questions = [
             "Not eligible for coverage / N/A",
             "No",
             "Yes",
-            "I don't know "
+            "I don't know"
         ],
         "variable": {
             "name": "cep_benefits",

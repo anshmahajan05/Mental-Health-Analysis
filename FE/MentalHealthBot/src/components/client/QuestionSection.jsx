@@ -11,6 +11,7 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
         setActiveNext(false);
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     }
+    // console.log(answers);
   };
 
   // const handlePreviousQuestion = () => {
@@ -51,7 +52,7 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
                   e.preventDefault();
                   handleOptionChange({ target: { value: opt } });
                 }}
-                style={{ marginBottom: "10px", width:"75%" }} // Add margin for buttons
+                style={{ marginBottom: "10px", width: "75%" }} // Add margin for buttons
               >
                 {opt}
               </button>
@@ -59,20 +60,37 @@ const QuestionSection = ({ questions, answers, setAnswers, onSubmit }) => {
           ) : (
             <div className="option-item">
               {/* If currentQuestion.option is not an array, show a textarea for multiline input */}
-              <textarea
-                value={answers[currentQuestion.variable.name] || ""}
-                onChange={(e) => {
-                  const { value } = e.target; // Get the value of the input
-                  setAnswers((prevAnswers) => ({
-                    ...prevAnswers,
-                    [currentQuestion.variable.name]: value, // Update the specific key-value pair
-                  }));
-                }}
-                className="form-control"
-                placeholder="Enter your answer here"
-                rows={4}
-                style={{ marginBottom: "10px" }} // Add margin for textarea
-              />
+              {currentQuestion.variable.name == "age" ? (
+                <input
+                  type="number"
+                  value={answers[currentQuestion.variable.name] || ""}
+                  onChange={(e) => {
+                    const { value } = e.target; // Get the value of the input
+                    setAnswers((prevAnswers) => ({
+                      ...prevAnswers,
+                      [currentQuestion.variable.name]: value, // Update the specific key-value pair
+                    }));
+                  }}
+                  className="form-control"
+                  placeholder="Enter your answer here"
+                  style={{ marginBottom: "10px" }} // Add margin for textarea
+                />
+              ) : (
+                <textarea
+                  value={answers[currentQuestion.variable.name] || ""}
+                  onChange={(e) => {
+                    const { value } = e.target; // Get the value of the input
+                    setAnswers((prevAnswers) => ({
+                      ...prevAnswers,
+                      [currentQuestion.variable.name]: value, // Update the specific key-value pair
+                    }));
+                  }}
+                  className="form-control"
+                  placeholder="Enter your answer here"
+                  rows={4}
+                  style={{ marginBottom: "10px" }} // Add margin for textarea
+                />
+              )}
             </div>
           )}
         </div>

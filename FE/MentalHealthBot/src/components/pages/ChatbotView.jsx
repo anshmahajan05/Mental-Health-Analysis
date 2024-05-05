@@ -14,7 +14,7 @@ const ChatbotView = () => {
   const [message, setMessage] = useState("");
   const { token } = useAuth();
   const toast = useToast();
-  
+
   useEffect(() => {
     const getChatHistory = async () => {
       try {
@@ -37,14 +37,12 @@ const ChatbotView = () => {
             },
           }
         );
-        console.log(response1);
-        console.log(response2);
         setChat(response2.data?.messages);
-        setCurrentChat(chats.length-1);
+        setCurrentChat(chats.length - 1);
       } catch (e) {
         toast({
           title: `Error in fetching logs.`,
-          description: e.response.data.message,
+          description: e.message,
           status: "error",
           duration: 2000,
           isClosable: true,
@@ -57,22 +55,20 @@ const ChatbotView = () => {
     getChatHistory();
   }, []);
 
-  const messageSubmit = async() => {
+  const messageSubmit = async () => {
     try {
       const newMessage = {
         ChatID_id: 1,
         MessageContent: message,
         Sender: "User",
-        SentDateTime:new Date(),
+        SentDateTime: new Date(),
         Status: "success",
         id: chat.length,
-      }
+      };
       chat.push(newMessage);
       const response = await axios.post(
         `${URL}mentalhealth/chatbot/`,
-        { message: message,
-          ChatId:  list[currentChat].id,
-        },
+        { message: message, ChatId: list[currentChat].id },
         {
           headers: {
             "Content-Type": "application/json", // Set the content type of the request
@@ -85,7 +81,32 @@ const ChatbotView = () => {
     } catch (e) {
       toast({
         title: `Error sending message.`,
-        description: e.response.data.message,
+        description: e.message,
+        status: "error",
+        duration: 2000,
+        isClosable: true,
+        position: "top",
+      });
+      console.log(e);
+    }
+  };
+  const updateChat = async (id) => {
+    try {
+      const response2 = await axios.post(
+        `${URL}mentalhealth/chathistory/`,
+        { ChatId: id },
+        {
+          headers: {
+            "Content-Type": "application/json", // Set the content type of the request
+            Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
+          },
+        }
+      );
+      setChat(response2.data?.messages);
+    } catch (e) {
+      toast({
+        title: `Error in fetching logs.`,
+        description: e.message,
         status: "error",
         duration: 2000,
         isClosable: true,
@@ -95,42 +116,12 @@ const ChatbotView = () => {
     }
   };
 
-  useEffect(() => {
-    const updateChat = async () => {
-      try {
-        const response2 = await axios.post(
-          `${URL}mentalhealth/chathistory/`,
-          { ChatId: list[currentChat].id },
-          {
-            headers: {
-              "Content-Type": "application/json", // Set the content type of the request
-              Authorization: "Bearer " + token.access_token, // Replace with your access token or any other custom headers
-            },
-          }
-        );
-        setChat(response2.data?.messages);
-      } catch (e) {
-        toast({
-          title: `Error in fetching logs.`,
-          description: e.response.data.message,
-          status: "error",
-          duration: 2000,
-          isClosable: true,
-          position: "top",
-        });
-        console.log(e);
-      }
-    };
-    updateChat();
-  }, [currentChat]);
-
-  const newChat = async() => {
+  const newChat = async () => {
     try {
+      const len = list.length;
       const response = await axios.post(
         `${URL}mentalhealth/newchat/`,
-        { isTestGiven: "false",
-          TestId:  null,
-        },
+        { isTestGiven: "false", TestId: null },
         {
           headers: {
             "Content-Type": "application/json", // Set the content type of the request
@@ -138,8 +129,9 @@ const ChatbotView = () => {
           },
         }
       );
-      console.log(response);
-      // setCurrentChat(list[list.length]);
+      setList((prev)=>[...prev, response.data.chatid]);
+      updateChat(response.data.chatid.id);
+      setCurrentChat(len);
     } catch (e) {
       toast({
         title: `Unable to create a new chat.`,
@@ -151,7 +143,7 @@ const ChatbotView = () => {
       });
       console.log(e);
     }
-  }
+  };
   return (
     <>
       <div
@@ -168,9 +160,15 @@ const ChatbotView = () => {
           chatList={list}
           currentChat={currentChat}
           setCurrentChat={setCurrentChat}
-          newChat = {newChat}
+          newChat={newChat}
+          updateChat={updateChat}
         />
-        <Chatbox userChat={chat} messageContent={message} setMessage={setMessage} messageSubmit={messageSubmit}/>
+        <Chatbox
+          userChat={chat}
+          messageContent={message}
+          setMessage={setMessage}
+          messageSubmit={messageSubmit}
+        />
       </div>
     </>
   );
