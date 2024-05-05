@@ -68,9 +68,10 @@ const ChatbotView = () => {
         id: chat.length,
       };
       chat.push(newMessage);
+      setMessage("");
       const response = await axios.post(
         `${URL}mentalhealth/chatbot/`,
-        { message: message, ChatId: list[currentChat].id },
+        { message: newMessage.MessageContent, ChatId: list[currentChat].id },
         {
           headers: {
             "Content-Type": "application/json", // Set the content type of the request
@@ -79,7 +80,6 @@ const ChatbotView = () => {
         }
       );
       chat.push(response.data.reply);
-      setMessage("");
     } catch (e) {
       toast({
         title: `Error sending message.`,
