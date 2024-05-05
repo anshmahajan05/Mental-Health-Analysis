@@ -580,8 +580,6 @@ class TestApi(APIView):
             ).values()
         )
 
-        print(test.columns)
-
         test.drop(columns=['UserId_id'], inplace=True)
 
         context = {}
