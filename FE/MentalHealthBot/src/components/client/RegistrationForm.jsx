@@ -125,7 +125,7 @@ function SignUpPage() {
           },
         }
       );
-      if (response.status === 200) {
+      if (response.status == 200) {
         toast({
           title: `Signup Successfull. Login to continue.`,
           description: response.data.message,

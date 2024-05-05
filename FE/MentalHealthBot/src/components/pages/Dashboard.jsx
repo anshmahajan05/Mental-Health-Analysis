@@ -134,8 +134,8 @@ const Dashboard = () => {
             flexWrap: "wrap",
           }}
         >
-          {userType === "Customer" && renderUserButtons()}
-          {userType === "Therapist" && renderTherapistButtons()}
+          {userType == "Customer" && renderUserButtons()}
+          {userType == "Therapist" && renderTherapistButtons()}
         </div>
       </div>
       <div

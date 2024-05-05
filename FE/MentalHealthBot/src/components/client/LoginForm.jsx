@@ -43,8 +43,8 @@ function LoginForm() {
         }
       );
       // console.log(response);
-      if (response.status === 200) {
-        if (response.data.login_status === 1) {
+      if (response.status == 200) {
+        if (response.data.login_status == 1) {
           // toast({
           //   title: `Login`,
           //   description: response.data.message,

@@ -570,6 +570,7 @@ class TestApi(APIView):
         context['pred_openness'] = int(openness_pred[0])
         context['pred_diag_pro'] = int(diag_pred[0])
         context['pred_treatment'] = int(treatment_pred[0])
+        context['test_date'] = datetime.now().date()
 
         return JsonResponse(context, status=status.HTTP_200_OK)
 
