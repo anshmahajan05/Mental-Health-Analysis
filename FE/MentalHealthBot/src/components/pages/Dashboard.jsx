@@ -26,7 +26,7 @@ const Dashboard = () => {
         },
       });
       // console.log(response.data.results);
-      setTestResults(response.data.results);
+      setTestResults(response?.data?.results || []);
       setLoader(false);
     } catch (error) {
       console.log(error);
@@ -182,7 +182,7 @@ const Dashboard = () => {
         >
           {loader ? (
             <div>Loading...</div>
-          ) : testResults.length === 0 ? (
+          ) : testResults.length == 0 ? (
             <div>You have not taken any tests yet.</div>
           ) : (
             testResults.map((result, index) => (

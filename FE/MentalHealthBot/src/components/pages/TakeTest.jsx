@@ -41,7 +41,6 @@ const TakeTest = () => {
           },
         }
       );
-      console.log(response);
       if (response.status === 200) {
         setTestResults(response.data); // Store the test results
         setIsModalOpen(true); // Open the modal
