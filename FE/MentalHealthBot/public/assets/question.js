@@ -391,7 +391,7 @@ const questions = [
         "question": "Would you have been willing to discuss a mental health issue with your direct supervisor(s)?",
         "option": [
             "Some of my previous employers",
-            "I don't know ",
+            "I don't know",
             "No, at none of my previous employers",
             "Yes, at all of my previous employers"
         ],
@@ -409,7 +409,7 @@ const questions = [
         "question": "Did you feel that your previous employers took mental health as seriously as physical health?",
         "option": [
             "Some did",
-            "I don't know ",
+            "I don't know",
             "None did",
             "Yes, they all did"
         ],
