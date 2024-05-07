@@ -53,12 +53,12 @@ After installing the requirements, create a .env file in `./BE/mentalhealthbot` 
 
 ```bash
 PGENGINE="django.db.backends.postgresql_psycopg2"
-PGHOST="mentalhealth.postgres.database.azure.com"
-PGUSER="MentalHealthAdministrator"
-PGPORT="5432"
-PGDATABASE="postgres"
-PGPASSWORD="botproject12#"
-GOOGLE_API_KEY = "AIzaSyBLcsOVZuYNSXQTk70HzvIMZ76PTpvvWy8"
+PGHOST="{server-host}"
+PGUSER="{server-user}"
+PGPORT="{server-port}"
+PGDATABASE="{database-name}"
+PGPASSWORD="{server-password}"
+GOOGLE_API_KEY = "{google-api-key}"
 ```
 
  You can change the Database config in setting.py ( for local db setup ) 
