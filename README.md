@@ -3,8 +3,8 @@
 - [Problem Statement](#Problem-Statement)
 - [Objective](#objective)
 - [Installation and Setup Guide](#Project-Setup-Guide)
-
-
+- BE: http://172.208.81.190/
+- FE: http://20.51.220.248/
 
 ## Problem Statement
 In recent years, global concerns about mental health (MH) have risen, impacting both well-being and productivity. Despite the prevalence of MH challenges, the tech workplace faces a notable stigma, hindering employees from addressing their mental health issues. This is especially critical in the high-stress tech industry. The objective is to investigate attitudes toward MH in tech workplaces and identify company features influencing employees' recognition and treatment-seeking for Mental Health Disorders (MHD). By exploring the experiences of tech industry professionals, the study aims to inform strategies for creating a supportive and conducive environment for mental well-being, contributing to targeted interventions and policies within tech companies.
