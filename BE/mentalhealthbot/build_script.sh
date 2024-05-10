@@ -1,6 +1,7 @@
 echo "Building Start"
 #!/bin/bash
 
+echo "installation start"
 # Download Python 3.10.12
 curl -O https://www.python.org/ftp/python/3.10.12/Python-3.10.12.tgz
 
@@ -27,6 +28,11 @@ make install
 export PATH="/vercel/path0/.vercel/python/bin:$PATH"
 export PYTHON_BIN_PATH="/vercel/path0/.vercel/python/bin/python3.10"
 export PIP_BIN_PATH="/vercel/path0/.vercel/python/bin/pip3.10"
+echo "installation end"
+
+pwd
+cd /vercel/path0/
+ls
 
 # Install Python packages
 $PIP_BIN_PATH install -r requirements.txt
