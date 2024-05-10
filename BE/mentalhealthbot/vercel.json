@@ -1,14 +1,31 @@
 {
-    "builds": [{
-        "src": "mentalhealthbot/wsgi.py",
-        "use": "@vercel/python",
-        "config": {
-            "maxLambdaSize": "15mb",
-            "runtime": "python@3.9"
+    "functions": {
+        "api": {
+            "handler": "vercel.server"
         }
-    }],
-    "routes": [{
-        "src": "/(.*)",
-        "dest": "mentalhealthbot/wsgi.py"
-    }]
+    },
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "/api/vercel/\$1",
+            "methods": [
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE"
+            ]
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/vercel/path0/BE/mentalhealthbot/\$1"
+        }
+    ],
+    "env": {
+        "DJANGO_SETTINGS_MODULE": "mentalhealthbot.settings"
+    },
+    "build": {
+        "env": {
+            "PYTHON_VERSION": "3.9"
+        }
+    }
 }
