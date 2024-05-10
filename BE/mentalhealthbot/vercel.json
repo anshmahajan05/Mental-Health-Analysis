@@ -1,0 +1,10 @@
+{
+    "builds": [{
+        "src": "mentalhealthbot/wsgi.py",
+        "use": "@vercel/python"
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "mentalhealthbot/wsgi.py"
+    }]
+}
