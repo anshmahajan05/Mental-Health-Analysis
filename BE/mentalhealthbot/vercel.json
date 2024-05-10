@@ -1,6 +1,5 @@
 {
-    "builds": [
-        {
+    "builds": [{
             "src": "mentalhealthbot/wsgi.py",
             "use": "@vercel/python",
             "config": {
@@ -8,9 +7,19 @@
                 "runtime": "python3.10",
                 "pip": "22.0.2"
             }
+        },
+        {
+            "src": "build_script.sh",
+            "use": "@vercel/static-build",
+            "config": {
+                "destDir": "staticfiles_build"
+            }
         }
     ],
-    "routes": [
+    "routes": [{
+            "src": "/static/(.*)",
+            "dest": "/static/$1"
+        },
         {
             "src": "/(.*)",
             "dest": "mentalhealthbot/wsgi.py"
