@@ -31,7 +31,7 @@ export PIP_BIN_PATH="/vercel/path0/.vercel/python/bin/pip3.10"
 echo "installation end"
 
 pwd
-cd /vercel/path0/
+cd /vercel/path0/BE/mentalhealthbot/
 ls
 
 # Install Python packages
