@@ -2,7 +2,7 @@ echo "Building Start"
 #!/bin/bash
 
 # Download Python 3.10.12
-wget https://www.python.org/ftp/python/3.10.12/Python-3.10.12.tgz
+curl -O https://www.python.org/ftp/python/3.10.12/Python-3.10.12.tgz
 
 # Extract Python source code
 tar -xf Python-3.10.12.tgz
