@@ -3,23 +3,27 @@
 - [Problem Statement](#Problem-Statement)
 - [Objective](#objective)
 - [Installation and Setup Guide](#Project-Setup-Guide)
-- BE: http://172.208.81.190/
-- FE: http://20.51.220.248/
+- Azure Deployed Instances
+   1. **BE**: http://172.208.81.190/
+   2. **FE**: http://20.51.220.248/
+- Free Deployed Instances
+   1. **BE**: https://mental-health-analysis.onrender.com/
+   2. **FE**: https://mental-health-analysis.vercel.app/
 
 ## Problem Statement
 In recent years, global concerns about mental health (MH) have risen, impacting both well-being and productivity. Despite the prevalence of MH challenges, the tech workplace faces a notable stigma, hindering employees from addressing their mental health issues. This is especially critical in the high-stress tech industry. The objective is to investigate attitudes toward MH in tech workplaces and identify company features influencing employees' recognition and treatment-seeking for Mental Health Disorders (MHD). By exploring the experiences of tech industry professionals, the study aims to inform strategies for creating a supportive and conducive environment for mental well-being, contributing to targeted interventions and policies within tech companies.
 
 ## Objective
-**Assessment and Analysis :** Users will engage in structured questions to evaluate their mental health status and concerns. Intelligent analysis of responses will determine the severity and nature of mental health issues.
+1. **Assessment and Analysis :** Users will engage in structured questions to evaluate their mental health status and concerns. Intelligent analysis of responses will determine the severity and nature of mental health issues.
 
-**Treatment Recommendations :** The system generates personalized treatment recommendations, suggesting self-care strategies, coping mechanisms, therapy options, or referrals to mental health professionals based on user information.
+2. **Treatment Recommendations :** The system generates personalized treatment recommendations, suggesting self-care strategies, coping mechanisms, therapy options, or referrals to mental health professionals based on user information.
 
-**Supportive Conversational Interface :** Featuring a chatbot, the system provides a supportive and non-judgmental environment for users to express feelings, seek advice, or discuss mental health concerns through interactive conversations.
+3. **Supportive Conversational Interface :** Featuring a chatbot, the system provides a supportive and non-judgmental environment for users to express feelings, seek advice, or discuss mental health concerns through interactive conversations.
 
 ## Project Setup Guide
 The project uses following tech stack:
 1. ReactJS + Vite
-2. Django
+2. Django + Django Rest Framework
 3. PostgresSQL
 
 ### Setting up PostgreSQL Database:
@@ -49,7 +53,7 @@ Install the necessary libraries using cmd:
    pip install -r requirements.txt
    ```
     
-After installing the requirements, create a .env file in `./BE/mentalhealthbot` and add the following code snippet into .env file.
+After installing the requirements, create a .env file in `./BE/mentalhealthbot` and add the following code snippet into .env file. Enter your Database credentions, PostgresSQL server details and Google Account API Key.
 
 ```bash
 PGENGINE="django.db.backends.postgresql_psycopg2"
@@ -61,7 +65,7 @@ PGPASSWORD="{server-password}"
 GOOGLE_API_KEY = "{google-api-key}"
 ```
 
- You can change the Database config in setting.py ( for local db setup ) 
+
 
 **Migrate the tables using command :**
 
